@@ -1046,28 +1046,15 @@ body.edit-mode .editable:hover {
 <div class="wrapper">
 
   <!-- ── DATA SOURCE BANNER ── -->
-  <div class="data-banner" id="dataBanner">
+  <!-- Only YOU see this banner (it reads from SHEET_URL_DATA/SETTINGS hardcoded below) -->
+  <!-- Visitors auto-fetch silently on load — no setup needed on their end -->
+  <div class="data-banner" id="dataBanner" style="display:none;">
     <div class="data-banner-text" id="bannerText">
-      <strong>Not connected.</strong> Paste your two Google Sheets CSV URLs below once — the dashboard will auto-load live data on every visit.
+      <strong>⚙️ Admin:</strong> Sheet URLs are hardcoded in the HTML. Use ↻ Refresh to reload data.
     </div>
-    <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;flex-direction:column;">
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span style="font-size:11px;font-weight:600;color:var(--muted);min-width:115px;">📊 Dashboard Data</span>
-        <input type="text" id="urlData" placeholder="Dashboard Data sheet — CSV URL"
-          style="border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;width:360px;font-family:var(--font-body);color:var(--text);background:var(--bg2);outline:none;"
-          onfocus="this.style.borderColor='var(--agco-teal)'" onblur="this.style.borderColor='var(--border)'">
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span style="font-size:11px;font-weight:600;color:var(--muted);min-width:115px;">⚙️ Settings</span>
-        <input type="text" id="urlSettings" placeholder="Settings sheet — CSV URL"
-          style="border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;width:360px;font-family:var(--font-body);color:var(--text);background:var(--bg2);outline:none;"
-          onfocus="this.style.borderColor='var(--agco-teal)'" onblur="this.style.borderColor='var(--border)'">
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button class="sheets-link" onclick="saveAndFetch()">💾 Save &amp; Connect</button>
-        <button class="sheets-link" style="background:var(--bg2);color:var(--agco-teal);border:1px solid var(--agco-teal);" onclick="refreshAll()">↻ Refresh Now</button>
-        <button class="sheets-link" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);" onclick="dismissBanner()">✕ Hide</button>
-      </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="sheets-link" onclick="refreshAll()">↻ Refresh Now</button>
+      <button class="sheets-link" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);" onclick="dismissBanner()">✕ Hide</button>
     </div>
   </div>
 
@@ -1200,8 +1187,8 @@ body.edit-mode .editable:hover {
       </div>
       <div class="goal-progress-wrap">
         <div class="progress-header">
-          <span class="progress-label">Progress to Target</span>
-          <span class="progress-pct editable" id="cvr-pct">58%</span>
+          <span class="progress-label" id="cvr-progress-label">Gap Closed</span>
+          <span class="progress-pct editable" id="cvr-pct">27%</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="cvr-bar" style="width:0%"></div>
@@ -1388,35 +1375,24 @@ body.edit-mode .editable:hover {
 
 <script>
 // ═══════════════════════════════════════════════════════════
-// AGCO GOAL SNAPSHOT — DATA LAYER
-//
-// HOW IT WORKS:
-// 1. URLs are saved to localStorage so you only paste them once.
-// 2. On every page load the dashboard auto-fetches both CSVs.
-// 3. Dashboard Data CSV  → drives all goal cards + progress bars
-// 4. Settings CSV        → drives quarter flag, subtitle, sparkline
-//
-// PROGRESS BARS: Sheet col F (pct_complete) = D÷E×100 (auto-calc).
-//   You only update col D (actual_num). % and bar update on refresh.
-//
-// QUARTER FLAG: Change "active_quarter" in Settings sheet → refresh.
+// ▼▼▼  PASTE YOUR PUBLISHED CSV URLS HERE (one-time setup) ▼▼▼
+// These are hardcoded so EVERY visitor auto-fetches live data.
+// No login, no URL input, no setup needed on their end.
 // ═══════════════════════════════════════════════════════════
+const SHEET_URL_DATA     = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDs1sjz5obIktBGfqhQDLOgiDijR5MfqYzumn6m19XUaN7FCYyaYtmkQ_scRLvMcMLgJJ7T-jyrU0i/pub?gid=638353354&single=true&output=csv';
+const SHEET_URL_SETTINGS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDs1sjz5obIktBGfqhQDLOgiDijR5MfqYzumn6m19XUaN7FCYyaYtmkQ_scRLvMcMLgJJ7T-jyrU0i/pub?gid=1357052043&single=true&output=csv';  // ← paste your Settings tab CSV URL here once published
 
-// ── Fallback data (shown until Sheets connected) ──────────
-const FALLBACK = {
-  revenue:  { actual:'$4.2M',  target:'$12M',  pct:35,  status:'On Track',    yoy:'↑ 18% YoY', meta:'AOV $148 · Orders 28.4K · Rev/Sess $3.20' },
-  cvr:      { actual:'2.4%',   target:'3.2%',  pct:58,  status:'At Risk',     yoy:'↓ vs Q1',   meta:'Cart→CKO 61% (↓4%) · CKO→Order 78% · 3 A/B tests live' },
-  traffic:  { actual:'1.3M',   target:'3.8M',  pct:34,  status:'On Track',    yoy:'↑ 22% YoY', meta:'Organic 44% (↑8%) · Paid 31% · Direct 25%' },
-  features: { actual:'2 / 5', target:'5',     pct:40,  status:'In Progress', yoy:'Q2 Active',  meta:'Smart Facets PLP in dev · Powered by COVEO' },
-};
-
+// ── Fallback data — shown instantly before sheet loads ────
+// Keep these updated so the page never looks empty on first load.
 const FALLBACK_MONTHLY = [580,620,710,680,790,0,0,0,0,0,0,0];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-// ── localStorage key names ────────────────────────────────
-const LS_URL_DATA     = 'agco_url_data';
-const LS_URL_SETTINGS = 'agco_url_settings';
-const LS_HIDE_BANNER  = 'agco_hide_banner';
+// ── Sparkline unit — overridden by Settings key: sparkline_unit
+// 'K' = thousands (enter 580 → shows $580K)
+// 'M' = millions  (enter 7.4 → shows $7.4M)
+let SPARKLINE_UNIT = 'K';
+
+const LS_HIDE_BANNER = 'agco_hide_banner'; // only remembers if YOU dismissed the admin banner
 
 // ── CSV parser (handles quoted fields with commas) ─────────
 // ── CSV line splitter (handles quoted fields with commas) ─
@@ -1563,7 +1539,8 @@ function applySettings(rows) {
   const overallPct = Math.round(weightedSum / totalWeight);
   document.getElementById('kpi-overall').textContent = overallPct + '%';
 
-  // ── Sparkline monthly values
+  // ── Sparkline unit (K or M) + monthly values
+  if (cfg['sparkline_unit']) SPARKLINE_UNIT = cfg['sparkline_unit'].toUpperCase() === 'M' ? 'M' : 'K';
   const monthly = MONTHS.map(m => ({
     m, v: parseFloat(cfg[`monthly_${m.toLowerCase()}`] || 0)
   }));
@@ -1724,14 +1701,12 @@ async function fetchCSV(url) {
 }
 
 // ── Fetch both sheets ─────────────────────────────────────
+// ── Fetch both sheets — runs on every page load for every visitor ──
 async function refreshAll(silent = false) {
-  const urlData     = localStorage.getItem(LS_URL_DATA)     || document.getElementById('urlData').value.trim();
-  const urlSettings = localStorage.getItem(LS_URL_SETTINGS) || document.getElementById('urlSettings').value.trim();
+  const urlData     = SHEET_URL_DATA;
+  const urlSettings = SHEET_URL_SETTINGS;
 
-  if (!urlData && !urlSettings) {
-    if (!silent) showBanner();
-    return;
-  }
+  if (!urlData && !urlSettings) return; // URLs not yet filled in by admin
 
   document.getElementById('loadingOverlay').classList.add('visible');
 
@@ -1782,31 +1757,9 @@ async function refreshAll(silent = false) {
   }
 }
 
-// ── Save URLs to localStorage then fetch ─────────────────
-function saveAndFetch() {
-  const d = document.getElementById('urlData').value.trim();
-  const s = document.getElementById('urlSettings').value.trim();
-  if (!d && !s) { alert('Please paste at least one CSV URL.'); return; }
-  if (d) localStorage.setItem(LS_URL_DATA, d);
-  if (s) localStorage.setItem(LS_URL_SETTINGS, s);
-  localStorage.removeItem(LS_HIDE_BANNER);
-  refreshAll();
-}
-
 function dismissBanner() {
   document.getElementById('dataBanner').style.display = 'none';
   localStorage.setItem(LS_HIDE_BANNER, '1');
-}
-
-function showBanner() {
-  const banner = document.getElementById('dataBanner');
-  banner.style.display = '';
-  localStorage.removeItem(LS_HIDE_BANNER);
-  // Pre-fill saved URLs
-  const d = localStorage.getItem(LS_URL_DATA);
-  const s = localStorage.getItem(LS_URL_SETTINGS);
-  if (d) document.getElementById('urlData').value = d;
-  if (s) document.getElementById('urlSettings').value = s;
 }
 
 // ── Auto-derive current quarter from today ────────────────
@@ -1814,16 +1767,14 @@ function getCurrentQuarter() {
   return Math.ceil((new Date().getMonth() + 1) / 3);
 }
 
-// ── Year progress & days — fully automatic, no manual input ──
+// ── Year progress & days — fully automatic ────────────────
 function calcYearProgress() {
-  const now    = new Date();
-  const yr     = now.getFullYear();
-  const start  = new Date(yr, 0, 1);
-  const end    = new Date(yr + 1, 0, 1);
-  const pct    = Math.round(((now - start) / (end - start)) * 100);
-  const days   = Math.ceil((end - now) / 86400000);
-  const elapsed = Math.floor((now - start) / 86400000);
-
+  const now   = new Date();
+  const yr    = now.getFullYear();
+  const start = new Date(yr, 0, 1);
+  const end   = new Date(yr + 1, 0, 1);
+  const pct   = Math.round(((now - start) / (end - start)) * 100);
+  const days  = Math.ceil((end - now) / 86400000);
   setTimeout(() => {
     document.getElementById('yearBar').style.width  = pct + '%';
     document.getElementById('yearTick').style.left  = pct + '%';
@@ -1847,39 +1798,47 @@ function setQuarterFlag(n) {
   });
 }
 
-// ── Sparkline ─────────────────────────────────────────────
+// ── Sparkline — unit-aware (K or M from Settings) ─────────
 function buildSparkline(data) {
   const monthly = data || MONTHS.map((m, i) => ({ m, v: FALLBACK_MONTHLY[i] }));
   const lastActualIdx = monthly.reduce((acc, d, i) => d.v > 0 ? i : acc, -1);
-  const max  = Math.max(...monthly.map(d => d.v), 900);
+  const maxVal = Math.max(...monthly.map(d => d.v), SPARKLINE_UNIT === 'M' ? 10 : 900);
   const wrap = document.getElementById('sparkline');
   const lbls = document.getElementById('sparkLabels');
   wrap.innerHTML = ''; lbls.innerHTML = '';
 
   monthly.forEach((d, i) => {
-    const pct = d.v > 0 ? Math.max((d.v / max) * 100, 6) : 5;
+    const pct = d.v > 0 ? Math.max((d.v / maxVal) * 100, 6) : 5;
     const bar = document.createElement('div');
     bar.className = 'spark-bar';
     bar.style.height = pct + '%';
-    bar.setAttribute('data-val', d.v > 0 ? '$' + d.v + 'K' : 'Pending');
+    // Tooltip: format based on unit
+    const tooltip = d.v > 0
+      ? (SPARKLINE_UNIT === 'M' ? `$${d.v}M` : `$${d.v}K`)
+      : 'Pending';
+    bar.setAttribute('data-val', tooltip);
     bar.style.background = i === lastActualIdx
       ? 'var(--agco-red)'
-      : d.v > 0
-        ? 'rgba(174,19,42,0.25)'
-        : 'var(--bg3)';
+      : d.v > 0 ? 'rgba(174,19,42,0.25)' : 'var(--bg3)';
     if (i === lastActualIdx) bar.style.boxShadow = '0 0 10px rgba(174,19,42,0.3)';
     if (d.v === 0)           bar.style.border    = '1px dashed var(--border)';
     wrap.appendChild(bar);
-
     const lbl = document.createElement('div');
     lbl.className = 'spark-label'; lbl.textContent = d.m;
     lbls.appendChild(lbl);
   });
+
+  // Update title with correct unit and year
+  const yr = new Date().getFullYear();
+  const unitLabel = SPARKLINE_UNIT === 'M' ? '($M)' : '($K)';
+  const titleEl = document.getElementById('sparkline-title');
+  if (titleEl) titleEl.textContent = `Monthly Revenue — ${yr} YTD ${unitLabel}`;
 }
 
-// ── Fallback bar animation (pre-Sheets) ───────────────────
+// ── Fallback bar animation ────────────────────────────────
 function animateFallbackBars() {
-  const pcts = { rev:35, cvr:58, trf:34, ftr:40 };
+  // CVR uses gap-based formula: (2.4-2.1)/(3.2-2.1)*100 = 27%
+  const pcts = { rev:35, cvr:27, trf:34, ftr:40 };
   setTimeout(() => {
     Object.entries(pcts).forEach(([id, pct]) => {
       document.getElementById(`${id}-bar`).style.width = pct + '%';
@@ -1912,7 +1871,7 @@ function toggleEdit() {
 
 function makeEditable(el) {
   if (el.querySelector('input')) return;
-  const cur   = el.textContent.trim();
+  const cur = el.textContent.trim();
   const input = document.createElement('input');
   input.value = cur;
   input.style.cssText = `width:${Math.max(cur.length*0.7+2,5)}em;font:inherit;border:none;
@@ -1934,30 +1893,22 @@ function makeEditable(el) {
   });
 }
 
-// ── INIT ──────────────────────────────────────────────────
+// ── INIT — runs for every visitor on every page load ──────
 (function init() {
   calcYearProgress();
   setLastUpdated();
   animateFallbackBars();
-  buildSparkline();
-  setQuarterFlag(getCurrentQuarter()); // auto from today's date — overridden by Settings sheet
+  buildSparkline();             // shows fallback data immediately
+  setQuarterFlag(getCurrentQuarter()); // auto from date, overridden by Settings
+  renderTeam({});               // render defaults immediately (fix issue 3)
+  renderMilestones({});         // render defaults immediately (fix issue 3)
 
-  // Pre-fill URL inputs from localStorage
-  const savedData     = localStorage.getItem(LS_URL_DATA);
-  const savedSettings = localStorage.getItem(LS_URL_SETTINGS);
-  if (savedData)     document.getElementById('urlData').value     = savedData;
-  if (savedSettings) document.getElementById('urlSettings').value = savedSettings;
-
-  // Hide banner if user dismissed it and URLs are saved
-  if (localStorage.getItem(LS_HIDE_BANNER) && (savedData || savedSettings)) {
-    document.getElementById('dataBanner').style.display = 'none';
-  }
-
-  // Auto-fetch if URLs are already saved
-  if (savedData || savedSettings) {
-    refreshAll(true);
-  }
+  // Always auto-fetch for every visitor — no setup required
+  refreshAll(true);
 })();
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
