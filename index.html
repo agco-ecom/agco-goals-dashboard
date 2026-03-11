@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGCO eCommerce — 2025 Goal Snapshot</title>
+<title>AGCO eCommerce — 2026 Goal Snapshot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -1099,7 +1099,7 @@ body.edit-mode .editable:hover {
   </div>
 
   <!-- ── KPI SUMMARY CARDS ── -->
-  <div class="kpi-row">
+  <div class="kpi-row" id="section-kpi">
     <div class="kpi-card" style="--kpi-color: var(--status-green);">
       <div class="kpi-label">Goals On Track</div>
       <div class="kpi-value editable" id="kpi-goals">2 / 4</div>
@@ -1338,140 +1338,50 @@ body.edit-mode .editable:hover {
 
   </div>
 
-  <!-- ── SECTION LABEL ── -->
-  <div class="section-label">Supporting Detail</div>
+  <!-- ── SECTION: Supporting Detail — hide with: section-sparkline, section-milestones -->
+  <div class="section-label" id="section-supporting-label">Supporting Detail</div>
 
-  <!-- ── BOTTOM ROW ── -->
-  <div class="bottom-row">
+  <div class="bottom-row" id="section-supporting">
 
-    <!-- Monthly Revenue -->
-    <div class="panel">
+    <!-- Monthly Revenue Sparkline — hide: set cfg.hide_sparkline=true in Settings -->
+    <div class="panel" id="section-sparkline">
       <div class="panel-title">
         <div class="panel-title-dot"></div>
-        Monthly Revenue — 2025 YTD ($K)
+        <span id="sparkline-title">Monthly Revenue — 2025 YTD ($K)</span>
       </div>
       <div class="sparkline-wrap" id="sparkline"></div>
       <div class="spark-labels" id="sparkLabels"></div>
     </div>
 
-    <!-- Feature Milestones -->
-    <div class="panel">
+    <!-- Feature Milestones — rendered from Settings sheet (milestone_N_name/status/date) -->
+    <!-- Hide: set cfg.hide_milestones=true in Settings -->
+    <div class="panel" id="section-milestones">
       <div class="panel-title">
         <div class="panel-title-dot" style="background:var(--agco-amber)"></div>
-        COVEO Feature Roadmap
+        <span id="milestones-title">Feature Roadmap</span>
       </div>
-      <div class="milestone-list">
-        <div class="milestone-item m-done">
-          <div class="milestone-dot"></div>
-          <div class="milestone-name">Phase 1 Search Launch</div>
-          <div class="milestone-date">Q1 2025</div>
-          <div class="milestone-tag tag-done">Done</div>
-        </div>
-        <div class="milestone-item m-done">
-          <div class="milestone-dot"></div>
-          <div class="milestone-name">AI Recommendations Widget</div>
-          <div class="milestone-date">Q1 2025</div>
-          <div class="milestone-tag tag-done">Done</div>
-        </div>
-        <div class="milestone-item m-active">
-          <div class="milestone-dot"></div>
-          <div class="milestone-name">Smart Facets — PLP Rollout</div>
-          <div class="milestone-date">Q2 2025</div>
-          <div class="milestone-tag tag-active">In Dev</div>
-        </div>
-        <div class="milestone-item m-upcoming">
-          <div class="milestone-dot"></div>
-          <div class="milestone-name">Personalised Search (Logged-in)</div>
-          <div class="milestone-date">Q3 2025</div>
-          <div class="milestone-tag tag-upcoming">Planned</div>
-        </div>
-        <div class="milestone-item m-upcoming">
-          <div class="milestone-dot"></div>
-          <div class="milestone-name">Cross-sell / Upsell AI Engine (PDP)</div>
-          <div class="milestone-date">Q4 2025</div>
-          <div class="milestone-tag tag-upcoming">Planned</div>
-        </div>
+      <div class="milestone-list" id="milestoneList">
+        <!-- Rendered by JS from Settings sheet -->
       </div>
     </div>
 
   </div>
 
-  <!-- ── TEAM OWNERSHIP ── -->
-  <div class="section-label">Team Ownership</div>
-  <div class="panel" style="margin-bottom:32px;">
-    <div class="owner-list">
-      <div class="owner-row">
-        <div class="owner-avatar" style="background:var(--cvr-tint);color:var(--agco-red);">R</div>
-        <div class="owner-info">
-          <div class="owner-name">Richard</div>
-          <div class="owner-role">Team Lead · All Goals</div>
-        </div>
-        <div class="owner-goals">
-          <div class="goal-dot" style="background:var(--rev-color)" title="Revenue"></div>
-          <div class="goal-dot" style="background:var(--cvr-color)" title="CVR"></div>
-          <div class="goal-dot" style="background:var(--trf-color)" title="Traffic"></div>
-          <div class="goal-dot" style="background:var(--ftr-color)" title="Features"></div>
-        </div>
-      </div>
-      <div class="owner-row">
-        <div class="owner-avatar" style="background:var(--rev-tint);color:var(--agco-teal);">S</div>
-        <div class="owner-info">
-          <div class="owner-name">Sarthak</div>
-          <div class="owner-role">Analytics Lead · Data, CVR, Attribution</div>
-        </div>
-        <div class="owner-goals">
-          <div class="goal-dot" style="background:var(--rev-color)"></div>
-          <div class="goal-dot" style="background:var(--cvr-color)"></div>
-          <div class="goal-dot" style="background:var(--trf-color)"></div>
-          <div class="goal-dot" style="background:var(--border)" title="N/A"></div>
-        </div>
-      </div>
-      <div class="owner-row">
-        <div class="owner-avatar" style="background:var(--ftr-tint);color:var(--agco-amber);">A</div>
-        <div class="owner-info">
-          <div class="owner-name">A/B &amp; Personalisation Specialist</div>
-          <div class="owner-role">Testing · CVR &amp; Feature Delivery</div>
-        </div>
-        <div class="owner-goals">
-          <div class="goal-dot" style="background:var(--border)"></div>
-          <div class="goal-dot" style="background:var(--cvr-color)"></div>
-          <div class="goal-dot" style="background:var(--border)"></div>
-          <div class="goal-dot" style="background:var(--ftr-color)"></div>
-        </div>
-      </div>
-      <div class="owner-row">
-        <div class="owner-avatar" style="background:var(--trf-tint);color:var(--agco-olive);">C</div>
-        <div class="owner-info">
-          <div class="owner-name">SEO &amp; Content Specialists</div>
-          <div class="owner-role">Organic Traffic · Content Enrichment</div>
-        </div>
-        <div class="owner-goals">
-          <div class="goal-dot" style="background:var(--border)"></div>
-          <div class="goal-dot" style="background:var(--border)"></div>
-          <div class="goal-dot" style="background:var(--trf-color)"></div>
-          <div class="goal-dot" style="background:var(--border)"></div>
-        </div>
-      </div>
-      <div class="owner-row">
-        <div class="owner-avatar" style="background:var(--cvr-tint);color:var(--agco-red);">M</div>
-        <div class="owner-info">
-          <div class="owner-name">Marketing &amp; Agency</div>
-          <div class="owner-role">Campaigns · Paid Traffic · Revenue</div>
-        </div>
-        <div class="owner-goals">
-          <div class="goal-dot" style="background:var(--rev-color)"></div>
-          <div class="goal-dot" style="background:var(--border)"></div>
-          <div class="goal-dot" style="background:var(--trf-color)"></div>
-          <div class="goal-dot" style="background:var(--border)"></div>
-        </div>
+  <!-- ── SECTION: Team Ownership — rendered from Settings sheet (team_N_name/role/goals) -->
+  <!-- Hide: set cfg.hide_team=true in Settings sheet -->
+  <div id="section-team">
+    <div class="section-label">Team Ownership</div>
+    <div class="panel" style="margin-bottom:32px;">
+      <div class="owner-list" id="ownerList">
+        <!-- Rendered by JS from Settings sheet -->
       </div>
     </div>
   </div>
 
   <!-- ── FOOTER ── -->
   <div class="footer-bar">
-    <div class="footer-logo">AGCO · eCommerce Parts · FY 2025</div>
-    <div class="footer-note">Placeholder values — click "Update Numbers" to enter actuals, or connect a Google Sheets CSV for live data.</div>
+    <div class="footer-logo" id="footer-logo">AGCO · eCommerce Parts · FY 2025</div>
+    <div class="footer-note" id="footer-note">Connected to Google Sheets · Refresh for latest data</div>
   </div>
 
 </div><!-- /wrapper -->
@@ -1601,34 +1511,182 @@ function applySettings(rows) {
     if (k) cfg[k] = v;
   });
 
-  // Quarter flag
-  const qRaw = (cfg['active_quarter'] || 'Q2').replace(/\s/g,'').toUpperCase();
-  const qNum = parseInt(qRaw.replace('Q','')) || 2;
+  // ── Quarter flag (auto-derived from today's date if not set)
+  let qNum = getCurrentQuarter();
+  if (cfg['active_quarter']) {
+    const qRaw = cfg['active_quarter'].replace(/\s/g,'').toUpperCase();
+    qNum = parseInt(qRaw.replace('Q','')) || qNum;
+  }
   setQuarterFlag(qNum);
   const badge = document.querySelector('.live-badge');
-  if (badge) badge.innerHTML = `<span class="live-dot"></span>${qRaw} LIVE`;
+  if (badge) badge.innerHTML = `<span class="live-dot"></span>Q${qNum} LIVE`;
 
-  // Reporting period subtitle
-  const period = cfg['reporting_period'];
+  // ── Dashboard title & subtitle
+  const title = cfg['dashboard_title'];
+  if (title) document.querySelector('.top-bar-title').textContent = title;
+
+  const period   = cfg['reporting_period'];
+  const siteUrl  = cfg['site_url'] || 'parts.agcocorp.com';
   if (period) {
     const sub = document.querySelector('.top-bar-sub');
     if (sub) {
-      sub.innerHTML = `Customer Acquisition &amp; Retention &nbsp;·&nbsp; `
-        + `${cfg['site_url'] || 'parts.agcocorp.com'} &nbsp;·&nbsp; `
-        + `${period} &nbsp;·&nbsp; <span id="lastUpdated"></span>`;
+      sub.innerHTML = `Customer Acquisition &amp; Retention &nbsp;·&nbsp; ${siteUrl} &nbsp;·&nbsp; ${period} &nbsp;·&nbsp; <span id="lastUpdated"></span>`;
       setLastUpdated();
     }
   }
 
-  // KPI summary cards
-  if (cfg['kpi_goals_on_track'])   document.getElementById('kpi-goals').textContent   = cfg['kpi_goals_on_track'];
-  if (cfg['kpi_overall_progress']) document.getElementById('kpi-overall').textContent = cfg['kpi_overall_progress'];
+  // ── Footer
+  const footerLogo = cfg['footer_text'] || `AGCO · eCommerce Parts · FY ${new Date().getFullYear()}`;
+  document.getElementById('footer-logo').textContent = footerLogo;
 
-  // Sparkline monthly values
+  // ── KPI: Goals on track (manual override or auto-count from goal statuses)
+  if (cfg['kpi_goals_on_track']) {
+    document.getElementById('kpi-goals').textContent = cfg['kpi_goals_on_track'];
+  }
+
+  // ── KPI: Weighted average overall progress (fully automatic)
+  // Reads the four progress bars that were already painted by applyDashboardData.
+  // Weights can be overridden in Settings: weight_revenue, weight_cvr, weight_traffic, weight_features
+  const weights = {
+    rev: parseFloat(cfg['weight_revenue']  || 40),
+    cvr: parseFloat(cfg['weight_cvr']      || 25),
+    trf: parseFloat(cfg['weight_traffic']  || 20),
+    ftr: parseFloat(cfg['weight_features'] || 15),
+  };
+  const totalWeight = Object.values(weights).reduce((a,b) => a+b, 0);
+  let weightedSum = 0;
+  Object.entries(weights).forEach(([id, w]) => {
+    const pctEl = document.getElementById(`${id}-pct`);
+    const pct   = pctEl ? parseFloat(pctEl.textContent) || 0 : 0;
+    weightedSum += pct * w;
+  });
+  const overallPct = Math.round(weightedSum / totalWeight);
+  document.getElementById('kpi-overall').textContent = overallPct + '%';
+
+  // ── Sparkline monthly values
   const monthly = MONTHS.map(m => ({
     m, v: parseFloat(cfg[`monthly_${m.toLowerCase()}`] || 0)
   }));
   if (monthly.some(d => d.v > 0)) buildSparkline(monthly);
+
+  // ── Section visibility (set to "true" in Settings to hide)
+  const hideMap = {
+    'hide_sparkline':   'section-sparkline',
+    'hide_milestones':  'section-milestones',
+    'hide_team':        'section-team',
+    'hide_supporting':  'section-supporting',
+    'hide_kpi_row':     'section-kpi',
+  };
+  Object.entries(hideMap).forEach(([key, sectionId]) => {
+    const el = document.getElementById(sectionId);
+    if (el) el.style.display = cfg[key] === 'true' ? 'none' : '';
+  });
+
+  // ── Milestone list (rendered from Settings: milestone_1_name, milestone_1_date, milestone_1_status …)
+  renderMilestones(cfg);
+
+  // ── Team ownership (rendered from Settings: team_1_name, team_1_role, team_1_goals …)
+  renderTeam(cfg);
+}
+
+// ── Render milestone list from cfg keys ───────────────────
+// In Settings sheet add rows like:
+//   milestone_1_name   | Phase 1 Search Launch
+//   milestone_1_date   | Q1 2025
+//   milestone_1_status | done          ← done / active / upcoming
+//   milestone_2_name   | Smart Facets PLP
+//   milestone_2_date   | Q2 2025
+//   milestone_2_status | active
+function renderMilestones(cfg) {
+  const list = document.getElementById('milestoneList');
+  if (!list) return;
+
+  const milestones = [];
+  for (let i = 1; i <= 10; i++) {
+    const name   = cfg[`milestone_${i}_name`];
+    if (!name) break;
+    milestones.push({
+      name,
+      date:   cfg[`milestone_${i}_date`]   || '',
+      status: (cfg[`milestone_${i}_status`] || 'upcoming').toLowerCase(),
+    });
+  }
+
+  if (milestones.length === 0) return; // keep hardcoded fallback if no sheet data
+
+  const statusMap = {
+    done:     { cls:'m-done',     tag:'tag-done',     label:'Done'    },
+    active:   { cls:'m-active',   tag:'tag-active',   label:'In Dev'  },
+    upcoming: { cls:'m-upcoming', tag:'tag-upcoming', label:'Planned' },
+    'in dev': { cls:'m-active',   tag:'tag-active',   label:'In Dev'  },
+    planned:  { cls:'m-upcoming', tag:'tag-upcoming', label:'Planned' },
+  };
+
+  list.innerHTML = milestones.map(m => {
+    const s = statusMap[m.status] || statusMap.upcoming;
+    return `<div class="milestone-item ${s.cls}">
+      <div class="milestone-dot"></div>
+      <div class="milestone-name">${m.name}</div>
+      ${m.date ? `<div class="milestone-date">${m.date}</div>` : ''}
+      <div class="milestone-tag ${s.tag}">${s.label}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Render team ownership from cfg keys ───────────────────
+// In Settings sheet add rows like:
+//   team_1_name   | Richard
+//   team_1_role   | Team Lead · All Goals
+//   team_1_goals  | rev,cvr,trf,ftr     ← comma-separated goal IDs
+//   team_1_color  | red                 ← red/teal/olive/amber/charcoal (optional)
+//   team_2_name   | Sarthak
+//   team_2_role   | Analytics Lead · Data, CVR, Attribution
+//   team_2_goals  | rev,cvr,trf
+function renderTeam(cfg) {
+  const list = document.getElementById('ownerList');
+  if (!list) return;
+
+  const members = [];
+  for (let i = 1; i <= 10; i++) {
+    const name = cfg[`team_${i}_name`];
+    if (!name) break;
+    members.push({
+      name,
+      role:   cfg[`team_${i}_role`]   || '',
+      goals:  (cfg[`team_${i}_goals`] || '').split(',').map(g => g.trim().toLowerCase()),
+      color:  cfg[`team_${i}_color`]  || '',
+    });
+  }
+
+  if (members.length === 0) return; // keep hardcoded fallback
+
+  const colorMap = {
+    red:      { bg:'var(--cvr-tint)', fg:'var(--agco-red)'      },
+    teal:     { bg:'var(--rev-tint)', fg:'var(--agco-teal)'     },
+    olive:    { bg:'var(--trf-tint)', fg:'var(--agco-olive)'    },
+    amber:    { bg:'var(--ftr-tint)', fg:'var(--agco-amber)'    },
+    charcoal: { bg:'#EFEFEF',         fg:'var(--agco-charcoal)' },
+  };
+  const goalColors = { rev:'var(--rev-color)', cvr:'var(--cvr-color)', trf:'var(--trf-color)', ftr:'var(--ftr-color)' };
+  const allGoals   = ['rev','cvr','trf','ftr'];
+  const autoColors = ['teal','red','amber','olive','charcoal'];
+
+  list.innerHTML = members.map((m, idx) => {
+    const colorKey = m.color || autoColors[idx % autoColors.length];
+    const { bg, fg } = colorMap[colorKey] || colorMap.teal;
+    const initial    = m.name.charAt(0).toUpperCase();
+    const goalDots   = allGoals.map(g =>
+      `<div class="goal-dot" style="background:${m.goals.includes(g) ? goalColors[g] : 'var(--border)'}" title="${g}"></div>`
+    ).join('');
+    return `<div class="owner-row">
+      <div class="owner-avatar" style="background:${bg};color:${fg};">${initial}</div>
+      <div class="owner-info">
+        <div class="owner-name">${m.name}</div>
+        <div class="owner-role">${m.role}</div>
+      </div>
+      <div class="owner-goals">${goalDots}</div>
+    </div>`;
+  }).join('');
 }
 
 // ── Fetch a single CSV URL (CORS-safe) ───────────────────
@@ -1751,19 +1809,27 @@ function showBanner() {
   if (s) document.getElementById('urlSettings').value = s;
 }
 
-// ── Year progress (auto from today) ──────────────────────
+// ── Auto-derive current quarter from today ────────────────
+function getCurrentQuarter() {
+  return Math.ceil((new Date().getMonth() + 1) / 3);
+}
+
+// ── Year progress & days — fully automatic, no manual input ──
 function calcYearProgress() {
-  const now   = new Date();
-  const start = new Date(now.getFullYear(), 0, 1);
-  const end   = new Date(now.getFullYear() + 1, 0, 1);
-  const pct   = Math.round(((now - start) / (end - start)) * 100);
-  const days  = Math.ceil((end - now) / 86400000);
+  const now    = new Date();
+  const yr     = now.getFullYear();
+  const start  = new Date(yr, 0, 1);
+  const end    = new Date(yr + 1, 0, 1);
+  const pct    = Math.round(((now - start) / (end - start)) * 100);
+  const days   = Math.ceil((end - now) / 86400000);
+  const elapsed = Math.floor((now - start) / 86400000);
+
   setTimeout(() => {
     document.getElementById('yearBar').style.width  = pct + '%';
     document.getElementById('yearTick').style.left  = pct + '%';
     document.getElementById('yearPct').textContent  = pct + '%';
-    document.getElementById('daysLeft').textContent = days;
-    document.getElementById('kpi-days').textContent = '~' + days;
+    document.getElementById('daysLeft').textContent = days.toLocaleString();
+    document.getElementById('kpi-days').textContent = days.toLocaleString();
   }, 400);
 }
 
@@ -1874,7 +1940,7 @@ function makeEditable(el) {
   setLastUpdated();
   animateFallbackBars();
   buildSparkline();
-  setQuarterFlag(2); // default until Settings loads
+  setQuarterFlag(getCurrentQuarter()); // auto from today's date — overridden by Settings sheet
 
   // Pre-fill URL inputs from localStorage
   const savedData     = localStorage.getItem(LS_URL_DATA);
