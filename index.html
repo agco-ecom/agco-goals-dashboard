@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGCO eCommerce — 2025 Goal Snapshot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────
+   AGCO BRAND TOKENS
+   Red #AE132A · Olive #727C36 · Amber #D38028
+   Teal #107291 · Charcoal #525659
+───────────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --agco-red:      #AE132A;
+  --agco-olive:    #727C36;
+  --agco-amber:    #D38028;
+  --agco-teal:     #107291;
+  --agco-charcoal: #525659;
+
+  /* Goal colours */
+  --rev-color:  #107291;
+  --cvr-color:  #AE132A;
+  --trf-color:  #727C36;
+  --ftr-color:  #D38028;
+
+  --rev-tint: #E3F3F7;
+  --cvr-tint: #FAEAEC;
+  --trf-tint: #F0F2E8;
+  --ftr-tint: #FDF4E3;
+
+  /* Status */
+  --status-green:    #196B24;
+  --status-green-bg: #EBF4EC;
+  --status-amber:    #D38028;
+  --status-amber-bg: #FDF4E3;
+  --status-blue:     #107291;
+  --status-blue-bg:  #E3F3F7;
+  --status-red:      #AE132A;
+  --status-red-bg:   #FAEAEC;
+
+  /* Surface */
+  --bg:       #FFFFFF;
+  --bg2:      #F7F7F7;
+  --bg3:      #EFEFEF;
+  --border:   #E0E0E0;
+  --border-md:#C8C8C8;
+
+  /* Text */
+  --text:  #1A1A1A;
+  --muted: #767676;
+  --light: #B0B0B0;
+
+  /* Type */
+  --font-head: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg2);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+/* ── AGCO BRAND BAR (5 colours) ── */
+.brand-bar {
+  height: 7px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.brand-bar span {
+  flex: 1;
+}
+.brand-bar span:nth-child(1) { background: var(--agco-red);      flex: 2.4; }
+.brand-bar span:nth-child(2) { background: var(--agco-olive);    }
+.brand-bar span:nth-child(3) { background: var(--agco-amber);    }
+.brand-bar span:nth-child(4) { background: var(--agco-teal);     }
+.brand-bar span:nth-child(5) { background: var(--agco-charcoal); }
+
+/* ── TOP HEADER BAR ── */
+.top-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* AGCO SVG Logo inline */
+.agco-logo {
+  height: 40px;
+  width: auto;
+}
+
+.top-bar-center {
+  flex: 1;
+  text-align: center;
+}
+
+.top-bar-title {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.top-bar-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--status-green-bg);
+  border: 1px solid var(--status-green);
+  border-radius: 100px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--status-green);
+  letter-spacing: 0.04em;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+.edit-btn {
+  background: var(--bg);
+  border: 1px solid var(--border-md);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.edit-btn:hover { border-color: var(--agco-teal); color: var(--agco-teal); }
+.edit-btn.active { background: var(--agco-teal); border-color: var(--agco-teal); color: #fff; }
+
+/* ── WRAPPER ── */
+.wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--agco-red);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── YEAR PROGRESS ── */
+.year-section {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 28px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+
+.year-label {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.year-bar-wrap {
+  flex: 1;
+  min-width: 200px;
+}
+
+.year-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--light);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.year-track {
+  height: 10px;
+  background: var(--bg3);
+  border-radius: 100px;
+  overflow: visible;
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.year-fill {
+  height: 100%;
+  background: var(--agco-red);
+  border-radius: 100px;
+  position: relative;
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.year-fill::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--agco-red);
+  box-shadow: 0 0 0 3px rgba(174,19,42,0.15);
+}
+
+.quarter-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0;
+  margin-top: 8px;
+}
+
+.qtick {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--light);
+  font-family: var(--font-head);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.qtick.active {
+  color: var(--agco-red);
+  background: var(--cvr-tint);
+}
+
+.year-stat {
+  text-align: right;
+  white-space: nowrap;
+}
+.year-stat-num {
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--agco-red);
+  line-height: 1;
+}
+.year-stat-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ── KPI CARDS ROW ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+.kpi-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px 18px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--kpi-color, var(--agco-teal));
+}
+
+.kpi-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.kpi-value {
+  font-family: var(--font-head);
+  font-size: 46px;
+  font-weight: 800;
+  color: var(--kpi-color, var(--text));
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.kpi-sub {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── GOALS GRID ── */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .goals-grid { grid-template-columns: 1fr; }
+}
+
+.goal-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.goal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.goal-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--gc);
+}
+
+/* Goal number badge */
+.goal-num {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gc);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.goal-title {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.goal-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* Big number */
+.goal-big {
+  flex: 1;
+}
+
+.goal-big-num {
+  font-family: var(--font-head);
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--gc);
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.goal-big-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* Target box */
+.goal-target {
+  background: var(--gc-tint);
+  border: 1.5px solid var(--gc);
+  border-radius: 8px;
+  padding: 10px 16px 12px;
+  min-width: 110px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.goal-target-label {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gc);
+  margin-bottom: 4px;
+}
+
+.goal-target-num {
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gc);
+  line-height: 1.1;
+}
+
+.goal-target-sub {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* Status chip */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-family: var(--font-head);
+  border: 1px solid currentColor;
+}
+
+.chip-green  { color: var(--status-green);  background: var(--status-green-bg); }
+.chip-amber  { color: var(--status-amber);  background: var(--status-amber-bg); }
+.chip-blue   { color: var(--status-blue);   background: var(--status-blue-bg);  }
+.chip-red    { color: var(--status-red);    background: var(--status-red-bg);   }
+
+/* Progress bar */
+.goal-progress-wrap {
+  margin-top: 0;
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.progress-label {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.progress-pct {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gc);
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--bg3);
+  border-radius: 100px;
+  overflow: visible;
+  position: relative;
+  border: 1px solid var(--border);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gc);
+  border-radius: 100px;
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Expected pace tick */
+.pace-tick {
+  position: absolute;
+  top: -5px;
+  width: 2px;
+  height: 18px;
+  background: var(--border-md);
+  border-radius: 2px;
+}
+
+.pace-label {
+  position: absolute;
+  top: 14px;
+  font-size: 9px;
+  color: var(--light);
+  font-family: var(--font-head);
+  font-weight: 600;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+/* Goal footer */
+.goal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.goal-meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Sub-metrics row (shown on expand) */
+.sub-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s;
+  padding-top: 0;
+}
+
+.sub-metrics.expanded {
+  max-height: 200px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.sub-metric {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 12px;
+}
+
+.sub-metric-val {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.sub-metric-label {
+  font-size: 9px;
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.sub-metric-delta {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.delta-up   { color: var(--status-green); }
+.delta-down { color: var(--status-red); }
+.delta-flat { color: var(--muted); }
+
+.expand-hint {
+  font-size: 10px;
+  color: var(--agco-teal);
+  font-weight: 600;
+  font-family: var(--font-head);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.expand-arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+.expand-arrow.open { transform: rotate(180deg); }
+
+/* ── BOTTOM ROW ── */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .bottom-row { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+
+.panel-title {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-title-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--agco-red);
+  flex-shrink: 0;
+}
+
+/* Sparkline */
+.sparkline-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 100px;
+  margin-bottom: 8px;
+}
+
+.spark-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.spark-bar:hover { opacity: 0.8; }
+.spark-bar:hover::after {
+  content: attr(data-val);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--font-head);
+}
+
+.spark-labels {
+  display: flex;
+  gap: 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+
+.spark-label {
+  flex: 1;
+  text-align: center;
+  font-size: 9px;
+  color: var(--light);
+  font-family: var(--font-head);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Feature milestones */
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.milestone-item:last-child { border-bottom: none; }
+
+.milestone-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.m-done     .milestone-dot { background: var(--status-green); }
+.m-active   .milestone-dot { background: var(--agco-amber); box-shadow: 0 0 0 3px rgba(211,128,40,0.2); animation: pulse 2s infinite; }
+.m-upcoming .milestone-dot { background: var(--border-md); border: 2px solid var(--border-md); }
+
+.milestone-name {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.m-done .milestone-name { color: var(--muted); }
+
+.milestone-date {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.milestone-tag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: var(--font-head);
+  letter-spacing: 0.06em;
+  border: 1px solid currentColor;
+}
+
+.tag-done     { color: var(--status-green); background: var(--status-green-bg); }
+.tag-active   { color: var(--agco-amber);   background: var(--ftr-tint); }
+.tag-upcoming { color: var(--light);        background: var(--bg2); border-color: var(--border); }
+
+/* Team ownership */
+.owner-list { display: flex; flex-direction: column; gap: 0; }
+
+.owner-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.owner-row:last-child { border-bottom: none; }
+
+.owner-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+  border: 1.5px solid currentColor;
+}
+
+.owner-info { flex: 1; }
+
+.owner-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.owner-role {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+  font-style: italic;
+}
+
+.owner-goals {
+  display: flex;
+  gap: 5px;
+}
+
+.goal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ── FOOTER ── */
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0 0;
+  border-top: 2px solid var(--border);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--agco-red);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-note {
+  font-size: 11px;
+  color: var(--light);
+  font-style: italic;
+}
+
+/* ── EDIT MODE ── */
+body.edit-mode .editable {
+  outline: 2px dashed var(--agco-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+  cursor: text;
+  transition: background 0.15s;
+}
+body.edit-mode .editable:hover {
+  background: rgba(16,114,145,0.05);
+}
+
+/* ── DATA SOURCE BANNER ── */
+.data-banner {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--agco-teal);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+
+.data-banner-text {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.data-banner-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sheets-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--agco-teal);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.sheets-link:hover { background: #0D5F7A; }
+
+/* ── LOADING STATE ── */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+}
+.loading-overlay.visible { display: flex; }
+
+.loader {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--agco-red);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loader-text {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loader"></div>
+  <div class="loader-text">FETCHING DATA…</div>
+</div>
+
+<!-- AGCO 5-colour brand bar -->
+<div class="brand-bar">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- Top navigation bar -->
+<div class="top-bar">
+  <!-- AGCO Logo SVG inline -->
+  <svg class="agco-logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-label="AGCO">
+    <polygon points="14,48 28,8 42,48" fill="#AE132A"/>
+    <polygon points="14,48 28,30 42,48" fill="#FFFFFF" opacity="0.3"/>
+    <line x1="18" y1="44" x2="38" y2="44" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
+    <line x1="20" y1="40" x2="36" y2="40" stroke="#FFFFFF" stroke-width="1.2" opacity="0.5"/>
+    <line x1="22" y1="36" x2="34" y2="36" stroke="#FFFFFF" stroke-width="1" opacity="0.4"/>
+    <text x="50" y="38" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="#1A1A1A" letter-spacing="1">AGCO</text>
+    <text x="50" y="52" font-family="Arial, sans-serif" font-size="10" fill="#767676" letter-spacing="0.5">Your Agriculture Company</text>
+  </svg>
+
+  <div class="top-bar-center">
+    <div class="top-bar-title">2025 GOAL SNAPSHOT — eCOMMERCE PARTS</div>
+    <div class="top-bar-sub">Customer Acquisition &amp; Retention &nbsp;·&nbsp; parts.agcocorp.com &nbsp;·&nbsp; <span id="lastUpdated"></span></div>
+  </div>
+
+  <div class="top-bar-right">
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      Q2 LIVE
+    </div>
+    <button class="edit-btn" id="editBtn" onclick="toggleEdit()">
+      ✎ Update Numbers
+    </button>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- ── DATA SOURCE BANNER ── -->
+  <div class="data-banner" id="dataBanner">
+    <div class="data-banner-text" id="bannerText">
+      <strong>Not connected.</strong> Paste your two Google Sheets CSV URLs below once — the dashboard will auto-load live data on every visit.
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;flex-direction:column;">
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:11px;font-weight:600;color:var(--muted);min-width:115px;">📊 Dashboard Data</span>
+        <input type="text" id="urlData" placeholder="Dashboard Data sheet — CSV URL"
+          style="border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;width:360px;font-family:var(--font-body);color:var(--text);background:var(--bg2);outline:none;"
+          onfocus="this.style.borderColor='var(--agco-teal)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:11px;font-weight:600;color:var(--muted);min-width:115px;">⚙️ Settings</span>
+        <input type="text" id="urlSettings" placeholder="Settings sheet — CSV URL"
+          style="border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:11px;width:360px;font-family:var(--font-body);color:var(--text);background:var(--bg2);outline:none;"
+          onfocus="this.style.borderColor='var(--agco-teal)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="sheets-link" onclick="saveAndFetch()">💾 Save &amp; Connect</button>
+        <button class="sheets-link" style="background:var(--bg2);color:var(--agco-teal);border:1px solid var(--agco-teal);" onclick="refreshAll()">↻ Refresh Now</button>
+        <button class="sheets-link" style="background:var(--bg2);color:var(--muted);border:1px solid var(--border);" onclick="dismissBanner()">✕ Hide</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── YEAR PROGRESS ── -->
+  <div class="section-label">Year at a Glance</div>
+
+  <div class="year-section">
+    <div class="year-label">YEAR PROGRESS</div>
+    <div class="year-bar-wrap">
+      <div class="year-bar-labels">
+        <span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span>
+      </div>
+      <div class="year-track">
+        <div class="year-fill" id="yearBar" style="width:0%"></div>
+        <div class="pace-tick" id="yearTick" style="left:0%"></div>
+      </div>
+      <div class="quarter-ticks">
+        <span class="qtick" onclick="highlightQ(1)">Q1</span>
+        <span class="qtick active" onclick="highlightQ(2)">Q2 ▶</span>
+        <span class="qtick" onclick="highlightQ(3)">Q3</span>
+        <span class="qtick" onclick="highlightQ(4)">Q4</span>
+      </div>
+    </div>
+    <div class="year-stat">
+      <div class="year-stat-num" id="yearPct">—</div>
+      <div class="year-stat-sub">of 2025 elapsed</div>
+      <div class="year-stat-sub" style="margin-top:4px;"><strong id="daysLeft" style="color:var(--agco-amber)">—</strong> days remaining</div>
+    </div>
+  </div>
+
+  <!-- ── KPI SUMMARY CARDS ── -->
+  <div class="kpi-row">
+    <div class="kpi-card" style="--kpi-color: var(--status-green);">
+      <div class="kpi-label">Goals On Track</div>
+      <div class="kpi-value editable" id="kpi-goals">2 / 4</div>
+      <div class="kpi-sub">Revenue &amp; Traffic on pace</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--agco-charcoal);">
+      <div class="kpi-label">Overall Progress</div>
+      <div class="kpi-value editable" id="kpi-overall" style="color:var(--text);">38%</div>
+      <div class="kpi-sub">Weighted avg across goals</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--agco-amber);">
+      <div class="kpi-label">Days Remaining</div>
+      <div class="kpi-value editable" id="kpi-days">~295</div>
+      <div class="kpi-sub">To end of FY 2025</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color: var(--agco-teal);">
+      <div class="kpi-label">Features Shipped</div>
+      <div class="kpi-value editable" id="kpi-features">2 / 5</div>
+      <div class="kpi-sub">COVEO milestones delivered</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION LABEL ── -->
+  <div class="section-label">All 4 Goals</div>
+
+  <!-- ── GOAL CARDS ── -->
+  <div class="goals-grid">
+
+    <!-- GOAL 01 — Revenue -->
+    <div class="goal-card" style="--gc:var(--rev-color);--gc-tint:var(--rev-tint);" onclick="toggleSubs(this)">
+      <div class="goal-num">01 &nbsp;·&nbsp; eCommerce Revenue</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;">
+        <div class="goal-title" style="margin-bottom:0;">eCommerce<br>Revenue</div>
+        <span class="status-chip chip-green">● ON TRACK</span>
+      </div>
+      <div class="goal-body">
+        <div class="goal-big">
+          <div class="goal-big-num editable" id="rev-actual">$4.2M</div>
+          <div class="goal-big-label">YTD Actual</div>
+        </div>
+        <div class="goal-target">
+          <div class="goal-target-label">Target</div>
+          <div class="goal-target-num editable" id="rev-target">$12M</div>
+          <div class="goal-target-sub">Full Year</div>
+        </div>
+      </div>
+      <div class="goal-progress-wrap">
+        <div class="progress-header">
+          <span class="progress-label">Progress to Target</span>
+          <span class="progress-pct editable" id="rev-pct">35%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="rev-bar" style="width:0%"></div>
+          <div class="pace-tick" style="left:19%;"></div>
+          <div class="pace-label" style="left:19%;">Expected</div>
+        </div>
+      </div>
+      <div class="goal-footer">
+        <span class="goal-meta editable">AOV $148 &nbsp;·&nbsp; Orders 28.4K &nbsp;·&nbsp; YoY ↑18%</span>
+        <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
+      </div>
+      <div class="sub-metrics">
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">$148</div>
+          <div class="sub-metric-label">AOV</div>
+          <div class="sub-metric-delta delta-up">↑ 6%</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">28.4K</div>
+          <div class="sub-metric-label">Orders</div>
+          <div class="sub-metric-delta delta-up">↑ 11%</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">$3.20</div>
+          <div class="sub-metric-label">Rev / Session</div>
+          <div class="sub-metric-delta delta-flat">→ Flat</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 02 — CVR -->
+    <div class="goal-card" style="--gc:var(--cvr-color);--gc-tint:var(--cvr-tint);" onclick="toggleSubs(this)">
+      <div class="goal-num">02 &nbsp;·&nbsp; Conversion Rate</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;">
+        <div class="goal-title" style="margin-bottom:0;">Conversion<br>Rate</div>
+        <span class="status-chip chip-amber">⚠ AT RISK</span>
+      </div>
+      <div class="goal-body">
+        <div class="goal-big">
+          <div class="goal-big-num editable" id="cvr-actual">2.4%</div>
+          <div class="goal-big-label">Current CVR</div>
+        </div>
+        <div class="goal-target">
+          <div class="goal-target-label">Target</div>
+          <div class="goal-target-num editable" id="cvr-target">3.2%</div>
+          <div class="goal-target-sub">Full Year</div>
+        </div>
+      </div>
+      <div class="goal-progress-wrap">
+        <div class="progress-header">
+          <span class="progress-label">Progress to Target</span>
+          <span class="progress-pct editable" id="cvr-pct">58%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="cvr-bar" style="width:0%"></div>
+          <div class="pace-tick" style="left:19%;"></div>
+          <div class="pace-label" style="left:19%;">Expected</div>
+        </div>
+      </div>
+      <div class="goal-footer">
+        <span class="goal-meta editable">Cart→CKO 61% (↓4%) &nbsp;·&nbsp; 3 A/B tests live</span>
+        <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
+      </div>
+      <div class="sub-metrics">
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">61%</div>
+          <div class="sub-metric-label">Cart → CKO</div>
+          <div class="sub-metric-delta delta-down">↓ 4%</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">78%</div>
+          <div class="sub-metric-label">CKO → Order</div>
+          <div class="sub-metric-delta delta-up">↑ 2%</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">3</div>
+          <div class="sub-metric-label">A/B Tests Live</div>
+          <div class="sub-metric-delta delta-flat">Active</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 03 — Traffic -->
+    <div class="goal-card" style="--gc:var(--trf-color);--gc-tint:var(--trf-tint);" onclick="toggleSubs(this)">
+      <div class="goal-num">03 &nbsp;·&nbsp; Traffic Growth</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;">
+        <div class="goal-title" style="margin-bottom:0;">Traffic<br>Growth</div>
+        <span class="status-chip chip-green">● ON TRACK</span>
+      </div>
+      <div class="goal-body">
+        <div class="goal-big">
+          <div class="goal-big-num editable" id="trf-actual">1.3M</div>
+          <div class="goal-big-label">YTD Sessions</div>
+        </div>
+        <div class="goal-target">
+          <div class="goal-target-label">Target</div>
+          <div class="goal-target-num editable" id="trf-target">3.8M</div>
+          <div class="goal-target-sub">Full Year</div>
+        </div>
+      </div>
+      <div class="goal-progress-wrap">
+        <div class="progress-header">
+          <span class="progress-label">Progress to Target</span>
+          <span class="progress-pct editable" id="trf-pct">34%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="trf-bar" style="width:0%"></div>
+          <div class="pace-tick" style="left:19%;"></div>
+          <div class="pace-label" style="left:19%;">Expected</div>
+        </div>
+      </div>
+      <div class="goal-footer">
+        <span class="goal-meta editable">Organic 44% (↑8%) &nbsp;·&nbsp; Paid 31% &nbsp;·&nbsp; YoY ↑22%</span>
+        <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
+      </div>
+      <div class="sub-metrics">
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">44%</div>
+          <div class="sub-metric-label">Organic</div>
+          <div class="sub-metric-delta delta-up">↑ 8%</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">31%</div>
+          <div class="sub-metric-label">Paid</div>
+          <div class="sub-metric-delta delta-flat">→ Flat</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val editable">25%</div>
+          <div class="sub-metric-label">Direct</div>
+          <div class="sub-metric-delta delta-down">↓ 3%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 04 — Features -->
+    <div class="goal-card" style="--gc:var(--ftr-color);--gc-tint:var(--ftr-tint);" onclick="toggleSubs(this)">
+      <div class="goal-num">04 &nbsp;·&nbsp; Feature Delivery</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;">
+        <div class="goal-title" style="margin-bottom:0;">Feature<br>Delivery</div>
+        <span class="status-chip chip-blue">◉ IN PROGRESS</span>
+      </div>
+      <div class="goal-body">
+        <div class="goal-big">
+          <div class="goal-big-num editable" id="ftr-actual">2 / 5</div>
+          <div class="goal-big-label">Features Shipped</div>
+        </div>
+        <div class="goal-target">
+          <div class="goal-target-label">Target</div>
+          <div class="goal-target-num editable" id="ftr-target">5</div>
+          <div class="goal-target-sub">By Dec 2025</div>
+        </div>
+      </div>
+      <div class="goal-progress-wrap">
+        <div class="progress-header">
+          <span class="progress-label">Progress to Target</span>
+          <span class="progress-pct editable" id="ftr-pct">40%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="ftr-bar" style="width:0%"></div>
+          <div class="pace-tick" style="left:19%;"></div>
+          <div class="pace-label" style="left:19%;">Expected</div>
+        </div>
+      </div>
+      <div class="goal-footer">
+        <span class="goal-meta editable">Smart Facets PLP in dev &nbsp;·&nbsp; Powered by COVEO</span>
+        <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
+      </div>
+      <div class="sub-metrics">
+        <div class="sub-metric">
+          <div class="sub-metric-val">✓</div>
+          <div class="sub-metric-label">Phase 1 Search</div>
+          <div class="sub-metric-delta delta-up">Done</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val">✓</div>
+          <div class="sub-metric-label">AI Reco Widget</div>
+          <div class="sub-metric-delta delta-up">Done</div>
+        </div>
+        <div class="sub-metric">
+          <div class="sub-metric-val">…</div>
+          <div class="sub-metric-label">Smart Facets PLP</div>
+          <div class="sub-metric-delta delta-flat">In Dev</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── SECTION LABEL ── -->
+  <div class="section-label">Supporting Detail</div>
+
+  <!-- ── BOTTOM ROW ── -->
+  <div class="bottom-row">
+
+    <!-- Monthly Revenue -->
+    <div class="panel">
+      <div class="panel-title">
+        <div class="panel-title-dot"></div>
+        Monthly Revenue — 2025 YTD ($K)
+      </div>
+      <div class="sparkline-wrap" id="sparkline"></div>
+      <div class="spark-labels" id="sparkLabels"></div>
+    </div>
+
+    <!-- Feature Milestones -->
+    <div class="panel">
+      <div class="panel-title">
+        <div class="panel-title-dot" style="background:var(--agco-amber)"></div>
+        COVEO Feature Roadmap
+      </div>
+      <div class="milestone-list">
+        <div class="milestone-item m-done">
+          <div class="milestone-dot"></div>
+          <div class="milestone-name">Phase 1 Search Launch</div>
+          <div class="milestone-date">Q1 2025</div>
+          <div class="milestone-tag tag-done">Done</div>
+        </div>
+        <div class="milestone-item m-done">
+          <div class="milestone-dot"></div>
+          <div class="milestone-name">AI Recommendations Widget</div>
+          <div class="milestone-date">Q1 2025</div>
+          <div class="milestone-tag tag-done">Done</div>
+        </div>
+        <div class="milestone-item m-active">
+          <div class="milestone-dot"></div>
+          <div class="milestone-name">Smart Facets — PLP Rollout</div>
+          <div class="milestone-date">Q2 2025</div>
+          <div class="milestone-tag tag-active">In Dev</div>
+        </div>
+        <div class="milestone-item m-upcoming">
+          <div class="milestone-dot"></div>
+          <div class="milestone-name">Personalised Search (Logged-in)</div>
+          <div class="milestone-date">Q3 2025</div>
+          <div class="milestone-tag tag-upcoming">Planned</div>
+        </div>
+        <div class="milestone-item m-upcoming">
+          <div class="milestone-dot"></div>
+          <div class="milestone-name">Cross-sell / Upsell AI Engine (PDP)</div>
+          <div class="milestone-date">Q4 2025</div>
+          <div class="milestone-tag tag-upcoming">Planned</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TEAM OWNERSHIP ── -->
+  <div class="section-label">Team Ownership</div>
+  <div class="panel" style="margin-bottom:32px;">
+    <div class="owner-list">
+      <div class="owner-row">
+        <div class="owner-avatar" style="background:var(--cvr-tint);color:var(--agco-red);">R</div>
+        <div class="owner-info">
+          <div class="owner-name">Richard</div>
+          <div class="owner-role">Team Lead · All Goals</div>
+        </div>
+        <div class="owner-goals">
+          <div class="goal-dot" style="background:var(--rev-color)" title="Revenue"></div>
+          <div class="goal-dot" style="background:var(--cvr-color)" title="CVR"></div>
+          <div class="goal-dot" style="background:var(--trf-color)" title="Traffic"></div>
+          <div class="goal-dot" style="background:var(--ftr-color)" title="Features"></div>
+        </div>
+      </div>
+      <div class="owner-row">
+        <div class="owner-avatar" style="background:var(--rev-tint);color:var(--agco-teal);">S</div>
+        <div class="owner-info">
+          <div class="owner-name">Sarthak</div>
+          <div class="owner-role">Analytics Lead · Data, CVR, Attribution</div>
+        </div>
+        <div class="owner-goals">
+          <div class="goal-dot" style="background:var(--rev-color)"></div>
+          <div class="goal-dot" style="background:var(--cvr-color)"></div>
+          <div class="goal-dot" style="background:var(--trf-color)"></div>
+          <div class="goal-dot" style="background:var(--border)" title="N/A"></div>
+        </div>
+      </div>
+      <div class="owner-row">
+        <div class="owner-avatar" style="background:var(--ftr-tint);color:var(--agco-amber);">A</div>
+        <div class="owner-info">
+          <div class="owner-name">A/B &amp; Personalisation Specialist</div>
+          <div class="owner-role">Testing · CVR &amp; Feature Delivery</div>
+        </div>
+        <div class="owner-goals">
+          <div class="goal-dot" style="background:var(--border)"></div>
+          <div class="goal-dot" style="background:var(--cvr-color)"></div>
+          <div class="goal-dot" style="background:var(--border)"></div>
+          <div class="goal-dot" style="background:var(--ftr-color)"></div>
+        </div>
+      </div>
+      <div class="owner-row">
+        <div class="owner-avatar" style="background:var(--trf-tint);color:var(--agco-olive);">C</div>
+        <div class="owner-info">
+          <div class="owner-name">SEO &amp; Content Specialists</div>
+          <div class="owner-role">Organic Traffic · Content Enrichment</div>
+        </div>
+        <div class="owner-goals">
+          <div class="goal-dot" style="background:var(--border)"></div>
+          <div class="goal-dot" style="background:var(--border)"></div>
+          <div class="goal-dot" style="background:var(--trf-color)"></div>
+          <div class="goal-dot" style="background:var(--border)"></div>
+        </div>
+      </div>
+      <div class="owner-row">
+        <div class="owner-avatar" style="background:var(--cvr-tint);color:var(--agco-red);">M</div>
+        <div class="owner-info">
+          <div class="owner-name">Marketing &amp; Agency</div>
+          <div class="owner-role">Campaigns · Paid Traffic · Revenue</div>
+        </div>
+        <div class="owner-goals">
+          <div class="goal-dot" style="background:var(--rev-color)"></div>
+          <div class="goal-dot" style="background:var(--border)"></div>
+          <div class="goal-dot" style="background:var(--trf-color)"></div>
+          <div class="goal-dot" style="background:var(--border)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer-bar">
+    <div class="footer-logo">AGCO · eCommerce Parts · FY 2025</div>
+    <div class="footer-note">Placeholder values — click "Update Numbers" to enter actuals, or connect a Google Sheets CSV for live data.</div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// AGCO GOAL SNAPSHOT — DATA LAYER
+//
+// HOW IT WORKS:
+// 1. URLs are saved to localStorage so you only paste them once.
+// 2. On every page load the dashboard auto-fetches both CSVs.
+// 3. Dashboard Data CSV  → drives all goal cards + progress bars
+// 4. Settings CSV        → drives quarter flag, subtitle, sparkline
+//
+// PROGRESS BARS: Sheet col F (pct_complete) = D÷E×100 (auto-calc).
+//   You only update col D (actual_num). % and bar update on refresh.
+//
+// QUARTER FLAG: Change "active_quarter" in Settings sheet → refresh.
+// ═══════════════════════════════════════════════════════════
+
+// ── Fallback data (shown until Sheets connected) ──────────
+const FALLBACK = {
+  revenue:  { actual:'$4.2M',  target:'$12M',  pct:35,  status:'On Track',    yoy:'↑ 18% YoY', meta:'AOV $148 · Orders 28.4K · Rev/Sess $3.20' },
+  cvr:      { actual:'2.4%',   target:'3.2%',  pct:58,  status:'At Risk',     yoy:'↓ vs Q1',   meta:'Cart→CKO 61% (↓4%) · CKO→Order 78% · 3 A/B tests live' },
+  traffic:  { actual:'1.3M',   target:'3.8M',  pct:34,  status:'On Track',    yoy:'↑ 22% YoY', meta:'Organic 44% (↑8%) · Paid 31% · Direct 25%' },
+  features: { actual:'2 / 5', target:'5',     pct:40,  status:'In Progress', yoy:'Q2 Active',  meta:'Smart Facets PLP in dev · Powered by COVEO' },
+};
+
+const FALLBACK_MONTHLY = [580,620,710,680,790,0,0,0,0,0,0,0];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+// ── localStorage key names ────────────────────────────────
+const LS_URL_DATA     = 'agco_url_data';
+const LS_URL_SETTINGS = 'agco_url_settings';
+const LS_HIDE_BANNER  = 'agco_hide_banner';
+
+// ── CSV parser (handles quoted fields with commas) ─────────
+// ── CSV line splitter (handles quoted fields with commas) ─
+function splitCSVLine(line) {
+  const fields = [];
+  let cur = '', inQ = false;
+  for (const ch of line) {
+    if (ch === '"') { inQ = !inQ; }
+    else if (ch === ',' && !inQ) { fields.push(cur.trim().replace(/^"|"$/g,'')); cur = ''; }
+    else cur += ch;
+  }
+  fields.push(cur.trim().replace(/^"|"$/g,''));
+  return fields;
+}
+
+// Parse CSV → array of field arrays (index-based, ignores headers)
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  // Return rows as arrays, skip header row (row 0)
+  // Also skip any row that starts with the brand bar colour cells or title rows
+  return lines.slice(1)
+    .map(l => splitCSVLine(l))
+    .filter(f => f[0] && f[0].trim() !== '');
+}
+
+// ── Apply Dashboard Data CSV ──────────────────────────────
+// Column positions (0-indexed) from the xlsx:
+//  0: metric_key   1: display_value   2: target_display
+//  3: actual_num   4: target_num      5: pct_complete
+//  6: status       7: yoy_trend       8: meta_notes
+function applyDashboardData(rows) {
+  const keyMap = {
+    revenue: 'rev', cvr: 'cvr', conversion: 'cvr',
+    traffic: 'trf', features: 'ftr', feature: 'ftr',
+  };
+
+  rows.forEach(fields => {
+    const metricKey = (fields[0] || '').toLowerCase().trim();
+    const k = Object.keys(keyMap).find(p => metricKey.includes(p));
+    if (!k) return;
+    const id = keyMap[k];
+
+    const val    = fields[1] || '';   // display_value
+    const tgt    = fields[2] || '';   // target_display
+    const pct    = parseFloat(fields[5] || 0);  // pct_complete (formula result)
+    const status = fields[6] || '';   // status
+    const meta   = fields[8] || '';   // meta_notes
+
+    if (val) document.getElementById(`${id}-actual`).textContent = val;
+    if (tgt) document.getElementById(`${id}-target`).textContent = tgt;
+
+    if (!isNaN(pct) && pct > 0) {
+      document.getElementById(`${id}-pct`).textContent = Math.round(pct) + '%';
+      // Animate bar after short delay so transition fires
+      setTimeout(() => {
+        document.getElementById(`${id}-bar`).style.width = pct + '%';
+      }, 200);
+    }
+
+    if (meta) {
+      const mEl = document.getElementById(`${id}-actual`)
+                    ?.closest('.goal-card')?.querySelector('.goal-meta');
+      if (mEl) mEl.textContent = meta;
+    }
+
+    if (status) {
+      const card = document.getElementById(`${id}-actual`)?.closest('.goal-card');
+      const chip = card?.querySelector('.status-chip');
+      if (chip) {
+        const chipMap = {
+          'on track':    ['chip-green', '● ON TRACK'],
+          'at risk':     ['chip-amber', '⚠ AT RISK'],
+          'in progress': ['chip-blue',  '◉ IN PROGRESS'],
+          'behind':      ['chip-red',   '✕ BEHIND'],
+        };
+        const [cls, label] = chipMap[status.toLowerCase()] || ['chip-blue', status.toUpperCase()];
+        chip.className   = `status-chip ${cls}`;
+        chip.textContent = label;
+      }
+    }
+  });
+}
+
+// ── Apply Settings CSV ────────────────────────────────────
+// Column positions: 0: setting_key   1: setting_value
+function applySettings(rows) {
+  const cfg = {};
+  rows.forEach(fields => {
+    const k = (fields[0] || '').trim().toLowerCase();
+    const v = (fields[1] || '').trim();
+    if (k) cfg[k] = v;
+  });
+
+  // Quarter flag
+  const qRaw = (cfg['active_quarter'] || 'Q2').replace(/\s/g,'').toUpperCase();
+  const qNum = parseInt(qRaw.replace('Q','')) || 2;
+  setQuarterFlag(qNum);
+  const badge = document.querySelector('.live-badge');
+  if (badge) badge.innerHTML = `<span class="live-dot"></span>${qRaw} LIVE`;
+
+  // Reporting period subtitle
+  const period = cfg['reporting_period'];
+  if (period) {
+    const sub = document.querySelector('.top-bar-sub');
+    if (sub) {
+      sub.innerHTML = `Customer Acquisition &amp; Retention &nbsp;·&nbsp; `
+        + `${cfg['site_url'] || 'parts.agcocorp.com'} &nbsp;·&nbsp; `
+        + `${period} &nbsp;·&nbsp; <span id="lastUpdated"></span>`;
+      setLastUpdated();
+    }
+  }
+
+  // KPI summary cards
+  if (cfg['kpi_goals_on_track'])   document.getElementById('kpi-goals').textContent   = cfg['kpi_goals_on_track'];
+  if (cfg['kpi_overall_progress']) document.getElementById('kpi-overall').textContent = cfg['kpi_overall_progress'];
+
+  // Sparkline monthly values
+  const monthly = MONTHS.map(m => ({
+    m, v: parseFloat(cfg[`monthly_${m.toLowerCase()}`] || 0)
+  }));
+  if (monthly.some(d => d.v > 0)) buildSparkline(monthly);
+}
+
+// ── Fetch a single CSV URL (CORS-safe) ───────────────────
+// Google Sheets published CSVs block direct fetch() from local files.
+// We try direct first (works on GitHub Pages / Google Sites),
+// then fall through two public CORS proxies automatically.
+async function fetchCSV(url) {
+  const proxies = [
+    url,                                                              // direct — works when hosted
+    `https://corsproxy.io/?${encodeURIComponent(url)}`,              // proxy 1
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`, // proxy 2
+  ];
+
+  let lastErr;
+  for (const attempt of proxies) {
+    try {
+      const res = await fetch(attempt, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      if (text.trim().length < 10) throw new Error('Empty response');
+      const parsed = parseCSV(text);
+      // Debug: log raw CSV and parsed rows to console
+      console.group('📊 AGCO Dashboard — CSV fetch');
+      console.log('URL used:', attempt);
+      console.log('Raw CSV (first 3 lines):\n', text.split('\n').slice(0,4).join('\n'));
+      console.log('Parsed rows:', parsed);
+      console.groupEnd();
+      return parsed;
+    } catch (e) {
+      console.warn('Fetch attempt failed:', attempt, e.message);
+      lastErr = e;
+    }
+  }
+  throw new Error(`All fetch attempts failed. Last error: ${lastErr?.message}\n\nMake sure the sheet is published via File → Share → Publish to web → CSV.`);
+}
+
+// ── Fetch both sheets ─────────────────────────────────────
+async function refreshAll(silent = false) {
+  const urlData     = localStorage.getItem(LS_URL_DATA)     || document.getElementById('urlData').value.trim();
+  const urlSettings = localStorage.getItem(LS_URL_SETTINGS) || document.getElementById('urlSettings').value.trim();
+
+  if (!urlData && !urlSettings) {
+    if (!silent) showBanner();
+    return;
+  }
+
+  document.getElementById('loadingOverlay').classList.add('visible');
+
+  let ok = true;
+  const errors = [];
+
+  try {
+    if (urlData) {
+      const rows = await fetchCSV(urlData);
+      applyDashboardData(rows);
+    }
+  } catch (e) { errors.push('Dashboard Data: ' + e.message); ok = false; }
+
+  try {
+    if (urlSettings) {
+      const rows = await fetchCSV(urlSettings);
+      applySettings(rows);
+    }
+  } catch (e) { errors.push('Settings: ' + e.message); ok = false; }
+
+  document.getElementById('loadingOverlay').classList.remove('visible');
+
+  if (ok) {
+    // Animate bars with fresh data
+    setTimeout(() => {
+      ['rev','cvr','trf','ftr'].forEach(id => {
+        const pctEl = document.getElementById(`${id}-pct`);
+        const barEl = document.getElementById(`${id}-bar`);
+        if (pctEl && barEl) {
+          const n = parseFloat(pctEl.textContent);
+          if (!isNaN(n)) barEl.style.width = n + '%';
+        }
+      });
+    }, 300);
+
+    const banner = document.getElementById('dataBanner');
+    if (banner && !localStorage.getItem(LS_HIDE_BANNER)) {
+      banner.style.borderLeftColor = 'var(--status-green)';
+      banner.style.background      = 'var(--status-green-bg)';
+      document.getElementById('bannerText').innerHTML =
+        `<strong>✓ Connected to Google Sheets</strong> &nbsp;·&nbsp; Last refreshed: ${new Date().toLocaleTimeString()}`;
+    }
+    // Update last-updated label
+    setLastUpdated();
+  } else {
+    alert('Could not fetch data:\n\n' + errors.join('\n') +
+      '\n\nTroubleshooting:\n1. Sheet must be published: File → Share → Publish to web → select sheet → CSV\n2. Make sure "Anyone on the internet" can access it\n3. Wait 1-2 min after first publishing\n4. If opening HTML as a local file, host it on GitHub Pages or Google Sites');
+  }
+}
+
+// ── Save URLs to localStorage then fetch ─────────────────
+function saveAndFetch() {
+  const d = document.getElementById('urlData').value.trim();
+  const s = document.getElementById('urlSettings').value.trim();
+  if (!d && !s) { alert('Please paste at least one CSV URL.'); return; }
+  if (d) localStorage.setItem(LS_URL_DATA, d);
+  if (s) localStorage.setItem(LS_URL_SETTINGS, s);
+  localStorage.removeItem(LS_HIDE_BANNER);
+  refreshAll();
+}
+
+function dismissBanner() {
+  document.getElementById('dataBanner').style.display = 'none';
+  localStorage.setItem(LS_HIDE_BANNER, '1');
+}
+
+function showBanner() {
+  const banner = document.getElementById('dataBanner');
+  banner.style.display = '';
+  localStorage.removeItem(LS_HIDE_BANNER);
+  // Pre-fill saved URLs
+  const d = localStorage.getItem(LS_URL_DATA);
+  const s = localStorage.getItem(LS_URL_SETTINGS);
+  if (d) document.getElementById('urlData').value = d;
+  if (s) document.getElementById('urlSettings').value = s;
+}
+
+// ── Year progress (auto from today) ──────────────────────
+function calcYearProgress() {
+  const now   = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  const end   = new Date(now.getFullYear() + 1, 0, 1);
+  const pct   = Math.round(((now - start) / (end - start)) * 100);
+  const days  = Math.ceil((end - now) / 86400000);
+  setTimeout(() => {
+    document.getElementById('yearBar').style.width  = pct + '%';
+    document.getElementById('yearTick').style.left  = pct + '%';
+    document.getElementById('yearPct').textContent  = pct + '%';
+    document.getElementById('daysLeft').textContent = days;
+    document.getElementById('kpi-days').textContent = '~' + days;
+  }, 400);
+}
+
+function setLastUpdated() {
+  const el = document.getElementById('lastUpdated');
+  if (el) el.textContent = 'Updated: ' + new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'});
+}
+
+// ── Quarter flag ──────────────────────────────────────────
+function setQuarterFlag(n) {
+  document.querySelectorAll('.qtick').forEach((el, i) => {
+    const isActive = (i + 1 === n);
+    el.classList.toggle('active', isActive);
+    el.textContent = `Q${i+1}${isActive ? ' ▶' : ''}`;
+  });
+}
+
+// ── Sparkline ─────────────────────────────────────────────
+function buildSparkline(data) {
+  const monthly = data || MONTHS.map((m, i) => ({ m, v: FALLBACK_MONTHLY[i] }));
+  const lastActualIdx = monthly.reduce((acc, d, i) => d.v > 0 ? i : acc, -1);
+  const max  = Math.max(...monthly.map(d => d.v), 900);
+  const wrap = document.getElementById('sparkline');
+  const lbls = document.getElementById('sparkLabels');
+  wrap.innerHTML = ''; lbls.innerHTML = '';
+
+  monthly.forEach((d, i) => {
+    const pct = d.v > 0 ? Math.max((d.v / max) * 100, 6) : 5;
+    const bar = document.createElement('div');
+    bar.className = 'spark-bar';
+    bar.style.height = pct + '%';
+    bar.setAttribute('data-val', d.v > 0 ? '$' + d.v + 'K' : 'Pending');
+    bar.style.background = i === lastActualIdx
+      ? 'var(--agco-red)'
+      : d.v > 0
+        ? 'rgba(174,19,42,0.25)'
+        : 'var(--bg3)';
+    if (i === lastActualIdx) bar.style.boxShadow = '0 0 10px rgba(174,19,42,0.3)';
+    if (d.v === 0)           bar.style.border    = '1px dashed var(--border)';
+    wrap.appendChild(bar);
+
+    const lbl = document.createElement('div');
+    lbl.className = 'spark-label'; lbl.textContent = d.m;
+    lbls.appendChild(lbl);
+  });
+}
+
+// ── Fallback bar animation (pre-Sheets) ───────────────────
+function animateFallbackBars() {
+  const pcts = { rev:35, cvr:58, trf:34, ftr:40 };
+  setTimeout(() => {
+    Object.entries(pcts).forEach(([id, pct]) => {
+      document.getElementById(`${id}-bar`).style.width = pct + '%';
+    });
+  }, 700);
+}
+
+// ── Expand sub-metrics ────────────────────────────────────
+function toggleSubs(card) {
+  if (document.body.classList.contains('edit-mode')) return;
+  const subs  = card.querySelector('.sub-metrics');
+  const arrow = card.querySelector('.expand-arrow');
+  subs.classList.toggle('expanded', !subs.classList.contains('expanded'));
+  if (arrow) arrow.classList.toggle('open', subs.classList.contains('expanded'));
+}
+
+// ── Edit mode ─────────────────────────────────────────────
+let editMode = false;
+function toggleEdit() {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  const btn = document.getElementById('editBtn');
+  btn.textContent = editMode ? '✓ Done' : '✎ Update Numbers';
+  btn.classList.toggle('active', editMode);
+  document.querySelectorAll('.editable').forEach(el => {
+    el.onclick = editMode ? (e) => { e.stopPropagation(); makeEditable(el); } : null;
+    el.title   = editMode ? 'Click to edit' : '';
+  });
+}
+
+function makeEditable(el) {
+  if (el.querySelector('input')) return;
+  const cur   = el.textContent.trim();
+  const input = document.createElement('input');
+  input.value = cur;
+  input.style.cssText = `width:${Math.max(cur.length*0.7+2,5)}em;font:inherit;border:none;
+    border-bottom:2px solid var(--agco-teal);background:transparent;outline:none;
+    color:inherit;text-align:inherit;padding:0;`;
+  el.textContent = '';
+  el.appendChild(input);
+  input.focus(); input.select();
+  const save = () => {
+    const v = input.value.trim() || cur;
+    el.textContent = v;
+    const map = {'rev-pct':'rev-bar','cvr-pct':'cvr-bar','trf-pct':'trf-bar','ftr-pct':'ftr-bar'};
+    if (map[el.id]) { const n = parseFloat(v); if (!isNaN(n)) document.getElementById(map[el.id]).style.width = n + '%'; }
+  };
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { save(); input.blur(); }
+    if (e.key === 'Escape') { el.textContent = cur; }
+  });
+}
+
+// ── INIT ──────────────────────────────────────────────────
+(function init() {
+  calcYearProgress();
+  setLastUpdated();
+  animateFallbackBars();
+  buildSparkline();
+  setQuarterFlag(2); // default until Settings loads
+
+  // Pre-fill URL inputs from localStorage
+  const savedData     = localStorage.getItem(LS_URL_DATA);
+  const savedSettings = localStorage.getItem(LS_URL_SETTINGS);
+  if (savedData)     document.getElementById('urlData').value     = savedData;
+  if (savedSettings) document.getElementById('urlSettings').value = savedSettings;
+
+  // Hide banner if user dismissed it and URLs are saved
+  if (localStorage.getItem(LS_HIDE_BANNER) && (savedData || savedSettings)) {
+    document.getElementById('dataBanner').style.display = 'none';
+  }
+
+  // Auto-fetch if URLs are already saved
+  if (savedData || savedSettings) {
+    refreshAll(true);
+  }
+})();
+</script>
+</body>
+</html>
