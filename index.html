@@ -1334,7 +1334,7 @@ body.edit-mode .editable:hover {
     <div class="panel" id="section-sparkline">
       <div class="panel-title">
         <div class="panel-title-dot"></div>
-        <span id="sparkline-title">Monthly Revenue — 2025 YTD ($K)</span>
+        <span id="sparkline-title">Monthly Revenue — 2026 YTD ($M)</span>
       </div>
       <div class="sparkline-wrap" id="sparkline"></div>
       <div class="spark-labels" id="sparkLabels"></div>
@@ -1440,7 +1440,7 @@ function applyDashboardData(rows) {
     const tgt    = fields[2] || '';   // target_display
     const pct    = parseFloat(fields[5] || 0);  // pct_complete (formula result)
     const status = fields[6] || '';   // status
-    const meta   = fields[9] || '';   // meta_notes
+    const meta   = fields[8] || '';   // meta_notes
 
     if (val) document.getElementById(`${id}-actual`).textContent = val;
     if (tgt) document.getElementById(`${id}-target`).textContent = tgt;
