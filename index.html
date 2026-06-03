@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AGCO eCommerce — 2026 Goal Snapshot</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 55.4 45.6'%3E%3Cg fill='%23A6192E'%3E%3Cpolygon points='41.5,22.6 27.8,0 0,45.6'/%3E%3Cpolygon points='10.1,45.6 42.1,23.6 41.7,23 5.3,45.6'/%3E%3Cpolygon points='20.2,45.6 43,25.1 42.5,24.3 15.2,45.6'/%3E%3Cpolygon points='30.1,45.6 44.3,27.3 43.7,26.2 25.1,45.6'/%3E%3Cpath d='M55.4,45.6c0,0-6.9-11.1-10-16.6L35,45.6H55.4z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -723,8 +724,9 @@ body {
   display: flex;
   align-items: flex-end;
   gap: 6px;
-  height: 100px;
+  height: 120px;
   margin-bottom: 8px;
+  padding-top: 20px;
 }
 
 .spark-bar {
@@ -911,6 +913,150 @@ body {
   font-style: italic;
 }
 
+/* ── RATING TIER MARKERS ON PROGRESS BAR ── */
+.rating-tiers {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0;
+  margin-top: 8px;
+  position: relative;
+  height: 20px;
+}
+
+.tier-marker {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.tier-tick {
+  width: 1.5px;
+  height: 10px;
+  border-radius: 1px;
+}
+
+.tier-label {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.tier-3 .tier-tick  { background: var(--status-green); }
+.tier-3 .tier-label { color: var(--status-green); }
+.tier-4 .tier-tick  { background: var(--status-amber); }
+.tier-4 .tier-label { color: var(--status-amber); }
+.tier-5 .tier-tick  { background: var(--agco-red); }
+.tier-5 .tier-label { color: var(--agco-red); }
+
+/* ── CVR TOGGLE (Sessions / Users) ── */
+.cvr-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 14px;
+}
+
+.cvr-toggle-btn {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border: 1.5px solid var(--border-md);
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cvr-toggle-btn:first-child { border-radius: 6px 0 0 6px; }
+.cvr-toggle-btn:last-child  { border-radius: 0 6px 6px 0; border-left: none; }
+
+.cvr-toggle-btn.active {
+  background: var(--cvr-color);
+  border-color: var(--cvr-color);
+  color: #fff;
+}
+
+.cvr-toggle-btn:hover:not(.active) {
+  border-color: var(--cvr-color);
+  color: var(--cvr-color);
+}
+
+/* ── FEATURE NAMES LIST ── */
+.feature-names {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.feature-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.feature-icon.done     { background: var(--status-green-bg); color: var(--status-green); }
+.feature-icon.active   { background: var(--ftr-tint); color: var(--agco-amber); }
+.feature-icon.upcoming { background: var(--bg3); color: var(--light); }
+
+.feature-name {
+  flex: 1;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.feature-name.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border-md); }
+
+.feature-status-tag {
+  font-family: var(--font-head);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 100px;
+  border: 1px solid currentColor;
+}
+
+/* ── SPARKLINE BUDGET % LABELS ── */
+.spark-budget-label {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-head);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+.spark-budget-label.positive { color: var(--status-green); background: var(--status-green-bg); }
+.spark-budget-label.negative { color: var(--status-red); background: var(--status-red-bg); }
+
 /* ── EDIT MODE ── */
 body.edit-mode .editable {
   outline: 2px dashed var(--agco-teal);
@@ -1016,19 +1162,22 @@ body.edit-mode .editable:hover {
 
 <!-- Top navigation bar -->
 <div class="top-bar">
-  <!-- AGCO Logo SVG inline -->
-  <svg class="agco-logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-label="AGCO">
-    <polygon points="14,48 28,8 42,48" fill="#AE132A"/>
-    <polygon points="14,48 28,30 42,48" fill="#FFFFFF" opacity="0.3"/>
-    <line x1="18" y1="44" x2="38" y2="44" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6"/>
-    <line x1="20" y1="40" x2="36" y2="40" stroke="#FFFFFF" stroke-width="1.2" opacity="0.5"/>
-    <line x1="22" y1="36" x2="34" y2="36" stroke="#FFFFFF" stroke-width="1" opacity="0.4"/>
-    <text x="50" y="38" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="#1A1A1A" letter-spacing="1">AGCO</text>
-    <text x="50" y="52" font-family="Arial, sans-serif" font-size="10" fill="#767676" letter-spacing="0.5">Your Agriculture Company</text>
+  <!-- AGCO Logo -->
+  <svg class="agco-logo" viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-label="AGCO">
+    <!-- Triangle mark from official SVG -->
+    <g transform="translate(0,2) scale(0.95)">
+      <polygon points="41.5,22.6 27.8,0 0,45.6" fill="#A6192E"/>
+      <polygon points="10.1,45.6 42.1,23.6 41.7,23 5.3,45.6" fill="#A6192E"/>
+      <polygon points="20.2,45.6 43,25.1 42.5,24.3 15.2,45.6" fill="#A6192E"/>
+      <polygon points="30.1,45.6 44.3,27.3 43.7,26.2 25.1,45.6" fill="#A6192E"/>
+      <path d="M55.4,45.6c0,0-6.9-11.1-10-16.6L35,45.6H55.4z" fill="#A6192E"/>
+    </g>
+    <text x="58" y="32" font-family="Arial Black, Impact, sans-serif" font-size="30" font-weight="900" fill="#333" letter-spacing="2">AGCO</text>
+    <text x="58" y="46" font-family="Arial, sans-serif" font-size="9.5" fill="#767676" letter-spacing="0.3">Your Agriculture Company</text>
   </svg>
 
   <div class="top-bar-center">
-    <div class="top-bar-title">2025 GOAL SNAPSHOT — eCOMMERCE PARTS</div>
+    <div class="top-bar-title">2026 GOAL SNAPSHOT — eCOMMERCE PARTS</div>
     <div class="top-bar-sub">Customer Acquisition &amp; Retention &nbsp;·&nbsp; parts.agcocorp.com &nbsp;·&nbsp; <span id="lastUpdated"></span></div>
   </div>
 
@@ -1100,7 +1249,7 @@ body.edit-mode .editable:hover {
     <div class="kpi-card" style="--kpi-color: var(--agco-amber);">
       <div class="kpi-label">Days Remaining</div>
       <div class="kpi-value editable" id="kpi-days">~295</div>
-      <div class="kpi-sub">To end of FY 2025</div>
+      <div class="kpi-sub">To end of FY 2026</div>
     </div>
     <div class="kpi-card" style="--kpi-color: var(--agco-teal);">
       <div class="kpi-label">Features Shipped</div>
@@ -1128,7 +1277,7 @@ body.edit-mode .editable:hover {
           <div class="goal-big-label">YTD Actual</div>
         </div>
         <div class="goal-target">
-          <div class="goal-target-label">Target</div>
+          <div class="goal-target-label">Target ★3</div>
           <div class="goal-target-num editable" id="rev-target">$12M</div>
           <div class="goal-target-sub">Full Year</div>
         </div>
@@ -1143,8 +1292,13 @@ body.edit-mode .editable:hover {
           <div class="pace-tick" style="left:19%;"></div>
           <div class="pace-label" style="left:19%;">Expected</div>
         </div>
+        <div class="rating-tiers" id="rev-tiers">
+          <div class="tier-marker tier-3" style="left:71.9%"><div class="tier-tick"></div><div class="tier-label">(★3) $115M</div></div>
+          <div class="tier-marker tier-4" style="left:84.4%"><div class="tier-tick"></div><div class="tier-label">(★4) $135M</div></div>
+          <div class="tier-marker tier-5" style="left:100%"><div class="tier-tick"></div><div class="tier-label">(★5) $160M</div></div>
+        </div>
       </div>
-      <div class="goal-footer">
+     <!-- <div class="goal-footer">
         <span class="goal-meta editable">AOV $148 &nbsp;·&nbsp; Orders 28.4K &nbsp;·&nbsp; YoY ↑18%</span>
         <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
       </div>
@@ -1164,25 +1318,30 @@ body.edit-mode .editable:hover {
           <div class="sub-metric-label">Rev / Session</div>
           <div class="sub-metric-delta delta-flat">→ Flat</div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <!-- GOAL 02 — CVR -->
     <div class="goal-card" style="--gc:var(--cvr-color);--gc-tint:var(--cvr-tint);" onclick="toggleSubs(this)">
       <div class="goal-num">02 &nbsp;·&nbsp; Conversion Rate</div>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;gap:12px;">
         <div class="goal-title" style="margin-bottom:0;">Conversion<br>Rate</div>
         <span class="status-chip chip-amber">⚠ AT RISK</span>
+      </div>
+      <!-- Sessions / Users toggle -->
+      <div class="cvr-toggle-wrap" onclick="event.stopPropagation();">
+        <button class="cvr-toggle-btn active" id="cvr-btn-sessions" onclick="switchCVR('sessions')">BY SESSIONS</button>
+        <button class="cvr-toggle-btn" id="cvr-btn-users" onclick="switchCVR('users')">BY USERS</button>
       </div>
       <div class="goal-body">
         <div class="goal-big">
           <div class="goal-big-num editable" id="cvr-actual">2.4%</div>
-          <div class="goal-big-label">Current CVR</div>
+          <div class="goal-big-label" id="cvr-big-label">Current CVR (Sessions)</div>
         </div>
         <div class="goal-target">
-          <div class="goal-target-label">Target</div>
+          <div class="goal-target-label">Target ★3</div>
           <div class="goal-target-num editable" id="cvr-target">3.2%</div>
-          <div class="goal-target-sub">Full Year</div>
+          <div class="goal-target-sub">+10% YoY</div>
         </div>
       </div>
       <div class="goal-progress-wrap">
@@ -1195,8 +1354,11 @@ body.edit-mode .editable:hover {
           <div class="pace-tick" style="left:19%;"></div>
           <div class="pace-label" style="left:19%;">Expected</div>
         </div>
+        <div class="rating-tiers" id="cvr-tiers">
+          <!-- Dynamically rendered by JS from baseline × multipliers -->
+        </div>
       </div>
-      <div class="goal-footer">
+      <!--<div class="goal-footer">
         <span class="goal-meta editable">Cart→CKO 61% (↓4%) &nbsp;·&nbsp; 3 A/B tests live</span>
         <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
       </div>
@@ -1216,7 +1378,7 @@ body.edit-mode .editable:hover {
           <div class="sub-metric-label">A/B Tests Live</div>
           <div class="sub-metric-delta delta-flat">Active</div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <!-- GOAL 03 — Traffic -->
@@ -1232,7 +1394,7 @@ body.edit-mode .editable:hover {
           <div class="goal-big-label">YTD Sessions</div>
         </div>
         <div class="goal-target">
-          <div class="goal-target-label">Target</div>
+          <div class="goal-target-label">Target ★3</div>
           <div class="goal-target-num editable" id="trf-target">3.8M</div>
           <div class="goal-target-sub">Full Year</div>
         </div>
@@ -1247,8 +1409,11 @@ body.edit-mode .editable:hover {
           <div class="pace-tick" style="left:19%;"></div>
           <div class="pace-label" style="left:19%;">Expected</div>
         </div>
+        <div class="rating-tiers" id="trf-tiers">
+          <!-- Dynamically rendered by JS from baseline × multipliers -->
+        </div>
       </div>
-      <div class="goal-footer">
+     <!-- <div class="goal-footer">
         <span class="goal-meta editable">Organic 44% (↑8%) &nbsp;·&nbsp; Paid 31% &nbsp;·&nbsp; YoY ↑22%</span>
         <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
       </div>
@@ -1268,7 +1433,7 @@ body.edit-mode .editable:hover {
           <div class="sub-metric-label">Direct</div>
           <div class="sub-metric-delta delta-down">↓ 3%</div>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <!-- GOAL 04 — Features -->
@@ -1284,9 +1449,9 @@ body.edit-mode .editable:hover {
           <div class="goal-big-label">Features Shipped</div>
         </div>
         <div class="goal-target">
-          <div class="goal-target-label">Target</div>
+          <div class="goal-target-label">Target ★3</div>
           <div class="goal-target-num editable" id="ftr-target">5</div>
-          <div class="goal-target-sub">By Dec 2025</div>
+          <div class="goal-target-sub">By Dec 2026</div>
         </div>
       </div>
       <div class="goal-progress-wrap">
@@ -1299,8 +1464,13 @@ body.edit-mode .editable:hover {
           <div class="pace-tick" style="left:19%;"></div>
           <div class="pace-label" style="left:19%;">Expected</div>
         </div>
+        <div class="rating-tiers" id="ftr-tiers">
+          <div class="tier-marker tier-3" style="left:50%"><div class="tier-tick"></div><div class="tier-label">(★3) 5</div></div>
+          <div class="tier-marker tier-4" style="left:70%"><div class="tier-tick"></div><div class="tier-label">(★4) 7</div></div>
+          <div class="tier-marker tier-5" style="left:100%"><div class="tier-tick"></div><div class="tier-label">(★5) 10</div></div>
+        </div>
       </div>
-      <div class="goal-footer">
+     <!-- <div class="goal-footer">
         <span class="goal-meta editable">Smart Facets PLP in dev &nbsp;·&nbsp; Powered by COVEO</span>
         <span class="expand-hint">Details <span class="expand-arrow">▾</span></span>
       </div>
@@ -1320,7 +1490,7 @@ body.edit-mode .editable:hover {
           <div class="sub-metric-label">Smart Facets PLP</div>
           <div class="sub-metric-delta delta-flat">In Dev</div>
         </div>
-      </div>
+      </div>-->
     </div>
 
   </div>
@@ -1379,8 +1549,10 @@ body.edit-mode .editable:hover {
 // These are hardcoded so EVERY visitor auto-fetches live data.
 // No login, no URL input, no setup needed on their end.
 // ═══════════════════════════════════════════════════════════
-const SHEET_URL_DATA     = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDs1sjz5obIktBGfqhQDLOgiDijR5MfqYzumn6m19XUaN7FCYyaYtmkQ_scRLvMcMLgJJ7T-jyrU0i/pub?gid=2106473395&single=true&output=csv';
-const SHEET_URL_SETTINGS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRDs1sjz5obIktBGfqhQDLOgiDijR5MfqYzumn6m19XUaN7FCYyaYtmkQ_scRLvMcMLgJJ7T-jyrU0i/pub?gid=1707151396&single=true&output=csv';  // ← paste your Settings tab CSV URL here once published
+const SHEET_URL_DATA     = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjkyxBUVWPtWsnOAGCCYavyOVQNZd4FW-I9Y2HdOadgVuOzJQKHv2RlRnphmEqG_8wH6a041XcK34Y/pub?gid=1707994360&single=true&output=csv';
+const SHEET_URL_SETTINGS = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRjkyxBUVWPtWsnOAGCCYavyOVQNZd4FW-I9Y2HdOadgVuOzJQKHv2RlRnphmEqG_8wH6a041XcK34Y/pub?gid=1532413808&single=true&output=csv';  // ← paste your Settings tab CSV URL here once published
+const SHEET_URL_SUBMETRICS = ''; // ← paste your Sub-Metrics tab CSV URL here (File → Share → Publish to web → Sub-Metrics → CSV)
+
 
 // ── Fallback data — shown instantly before sheet loads ────
 // Keep these updated so the page never looks empty on first load.
@@ -1393,6 +1565,26 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov
 let SPARKLINE_UNIT = 'K';
 
 const LS_HIDE_BANNER = 'agco_hide_banner'; // only remembers if YOU dismissed the admin banner
+
+// ── CVR toggle state ─────────────────────────────────────
+// Stores both sessions and users CVR data from the Sheet
+let CVR_DATA = {
+  sessions: { actual: '1%', target: '', pct: 0, baseline: 0.66, status: 'At Risk', meta: '' },
+  users:    { actual: '—',  target: '', pct: 0, baseline: 0, status: '', meta: '' },
+};
+let CVR_MODE = 'sessions';
+
+// ── Rating tiers config — overridden by Settings sheet ───
+// Revenue: fixed $ targets.  CVR/Traffic: baseline × multiplier.  Features: fixed counts.
+let RATING_TIERS = {
+  rev: { t3: 115, t4: 135, t5: 160, max: 160, fmt: v => `$${v}M` },
+  cvr: { pct3: 10, pct4: 20, pct5: 30, baseline: 0.66, fmt: v => v.toFixed(2) + '%' },
+  trf: { pct3: 20, pct4: 35, pct5: 50, baseline: 0, fmt: v => { if (v >= 1000000) return (v/1000000).toFixed(1)+'M'; if (v >= 1000) return (v/1000).toFixed(0)+'K'; return v; } },
+  ftr: { t3: 5, t4: 7, t5: 10, max: 10 },
+};
+
+// ── Budget values for sparkline % labels ─────────────────
+let MONTHLY_BUDGET = [9.75,9.75,9.75,9.75,9.75,9.75,9.75,9.75,9.75,9.75,9.75,9.75];
 
 // ── CSV parser (handles quoted fields with commas) ─────────
 // ── CSV line splitter (handles quoted fields with commas) ─
@@ -1419,28 +1611,220 @@ function parseCSV(text) {
     .filter(f => f[0] && f[0].trim() !== '');
 }
 
+// ── Switch CVR between Sessions and Users ────────────────
+function switchCVR(mode) {
+  CVR_MODE = mode;
+  const d = CVR_DATA[mode];
+  document.getElementById('cvr-actual').textContent = d.actual;
+  document.getElementById('cvr-target').textContent = d.target || '—';
+  document.getElementById('cvr-big-label').textContent = `Current CVR (${mode === 'sessions' ? 'Sessions' : 'Users'})`;
+
+  // Update progress bar
+  const pct = d.pct || 0;
+  document.getElementById('cvr-pct').textContent = pct > 0 ? Math.round(pct) + '%' : '—';
+  document.getElementById('cvr-bar').style.width = pct + '%';
+
+  // Update status chip based on stored status
+  const card = document.getElementById('cvr-actual')?.closest('.goal-card');
+  const chip = card?.querySelector('.status-chip');
+  if (chip && d.status) {
+    const chipMap = {
+      'on track':    ['chip-green', '● ON TRACK'],
+      'at risk':     ['chip-amber', '⚠ AT RISK'],
+      'in progress': ['chip-blue',  '◉ IN PROGRESS'],
+      'behind':      ['chip-red',   '✕ BEHIND'],
+    };
+    const [cls, label] = chipMap[d.status.toLowerCase()] || ['chip-blue', d.status.toUpperCase()];
+    chip.className = `status-chip ${cls}`;
+    chip.textContent = label;
+  }
+
+  // Update meta notes if available
+  if (d.meta) {
+    const mEl = card?.querySelector('.goal-meta');
+    if (mEl) mEl.textContent = d.meta;
+  }
+
+  document.getElementById('cvr-btn-sessions').classList.toggle('active', mode === 'sessions');
+  document.getElementById('cvr-btn-users').classList.toggle('active', mode === 'users');
+  // Re-render CVR tiers with correct baseline
+  const bl = d.baseline || CVR_DATA.sessions.baseline || RATING_TIERS.cvr.baseline;
+  renderCVRTiers(bl);
+}
+
+// ── Render rating tier markers on a progress bar ─────────
+function renderRevenueTiers(cfg) {
+  const rt = RATING_TIERS.rev;
+  if (cfg['rating_rev_3']) rt.t3 = parseFloat(cfg['rating_rev_3']);
+  if (cfg['rating_rev_4']) rt.t4 = parseFloat(cfg['rating_rev_4']);
+  if (cfg['rating_rev_5']) rt.t5 = parseFloat(cfg['rating_rev_5']);
+  rt.max = rt.t5; // progress bar goes to ★5
+
+  const el = document.getElementById('rev-tiers');
+  if (!el) return;
+  const tiers = [
+    { cls: 'tier-3', val: rt.t3, pct: (rt.t3 / rt.max) * 100 },
+    { cls: 'tier-4', val: rt.t4, pct: (rt.t4 / rt.max) * 100 },
+    { cls: 'tier-5', val: rt.t5, pct: 100 },
+  ];
+  el.innerHTML = tiers.map(t =>
+    `<div class="tier-marker ${t.cls}" style="left:${t.pct}%"><div class="tier-tick"></div><div class="tier-label">(★${t.cls.slice(-1)}) ${rt.fmt(t.val)}</div></div>`
+  ).join('');
+
+  // Recalc revenue progress against ★5 max
+  const actualNum = parseFloat(document.getElementById('rev-actual')?.textContent?.replace(/[^0-9.]/g,'')) || 0;
+  // actualNum from display_value might be in $M already — check from the pct_complete field
+}
+
+function renderCVRTiers(baseline) {
+  const rt = RATING_TIERS.cvr;
+  const bl = baseline || rt.baseline;
+  const t3 = bl * (1 + rt.pct3 / 100);
+  const t4 = bl * (1 + rt.pct4 / 100);
+  const t5 = bl * (1 + rt.pct5 / 100);
+
+  const el = document.getElementById('cvr-tiers');
+  if (!el) return;
+  // Bar goes from baseline to ★5 target range
+  const range = t5 - bl;
+  const tiers = [
+    { cls: 'tier-3', val: t3, pct: range > 0 ? ((t3 - bl) / range) * 100 : 33 },
+    { cls: 'tier-4', val: t4, pct: range > 0 ? ((t4 - bl) / range) * 100 : 66 },
+    { cls: 'tier-5', val: t5, pct: 100 },
+  ];
+  el.innerHTML = tiers.map(t =>
+    `<div class="tier-marker ${t.cls}" style="left:${t.pct}%"><div class="tier-tick"></div><div class="tier-label">(★${t.cls.slice(-1)}) ${rt.fmt(t.val)}</div></div>`
+  ).join('');
+}
+
+function renderTrafficTiers(cfg) {
+  const rt = RATING_TIERS.trf;
+  if (cfg['rating_trf_pct3']) rt.pct3 = parseFloat(cfg['rating_trf_pct3']);
+  if (cfg['rating_trf_pct4']) rt.pct4 = parseFloat(cfg['rating_trf_pct4']);
+  if (cfg['rating_trf_pct5']) rt.pct5 = parseFloat(cfg['rating_trf_pct5']);
+  if (cfg['rating_trf_baseline']) rt.baseline = parseFloat(cfg['rating_trf_baseline']);
+
+  const bl = rt.baseline;
+  if (!bl || bl <= 0) return; // need baseline to calculate
+
+  const t3 = bl * (1 + rt.pct3 / 100);
+  const t4 = bl * (1 + rt.pct4 / 100);
+  const t5 = bl * (1 + rt.pct5 / 100);
+
+  const el = document.getElementById('trf-tiers');
+  if (!el) return;
+  const range = t5 - bl;
+  const tiers = [
+    { cls: 'tier-3', val: t3, pct: range > 0 ? ((t3 - bl) / range) * 100 : 33 },
+    { cls: 'tier-4', val: t4, pct: range > 0 ? ((t4 - bl) / range) * 100 : 66 },
+    { cls: 'tier-5', val: t5, pct: 100 },
+  ];
+  el.innerHTML = tiers.map(t =>
+    `<div class="tier-marker ${t.cls}" style="left:${t.pct}%"><div class="tier-tick"></div><div class="tier-label">(★${t.cls.slice(-1)}) ${rt.fmt(t.val)}</div></div>`
+  ).join('');
+}
+
+function renderFeatureTiers(cfg) {
+  const rt = RATING_TIERS.ftr;
+  if (cfg['rating_ftr_3']) rt.t3 = parseInt(cfg['rating_ftr_3']);
+  if (cfg['rating_ftr_4']) rt.t4 = parseInt(cfg['rating_ftr_4']);
+  if (cfg['rating_ftr_5']) rt.t5 = parseInt(cfg['rating_ftr_5']);
+  rt.max = rt.t5;
+
+  const el = document.getElementById('ftr-tiers');
+  if (!el) return;
+  const tiers = [
+    { cls: 'tier-3', val: rt.t3, pct: (rt.t3 / rt.max) * 100 },
+    { cls: 'tier-4', val: rt.t4, pct: (rt.t4 / rt.max) * 100 },
+    { cls: 'tier-5', val: rt.t5, pct: 100 },
+  ];
+  el.innerHTML = tiers.map(t =>
+    `<div class="tier-marker ${t.cls}" style="left:${t.pct}%"><div class="tier-tick"></div><div class="tier-label">(★${t.cls.slice(-1)}) ${t.val}</div></div>`
+  ).join('');
+}
+
+// ── Render feature names from Dashboard Data rows ────────
+// Reads rows starting with "feature_" from Dashboard Data CSV:
+//   feature_1 | Phase 1 Search Launch | done
+//   feature_2 | AI Reco Widget | done
+//   feature_3 | Smart Facets PLP | active
+function renderFeatureNames(featureRows) {
+  const list = document.getElementById('featureNamesList');
+  if (!list || featureRows.length === 0) return;
+
+  const statusIcons = {
+    done:     { icon: '✓', cls: 'done',     tagCls: 'tag-done',     tagLabel: 'Done' },
+    active:   { icon: '◉', cls: 'active',   tagCls: 'tag-active',   tagLabel: 'In Dev' },
+    'in dev': { icon: '◉', cls: 'active',   tagCls: 'tag-active',   tagLabel: 'In Dev' },
+    upcoming: { icon: '○', cls: 'upcoming', tagCls: 'tag-upcoming', tagLabel: 'Planned' },
+    planned:  { icon: '○', cls: 'upcoming', tagCls: 'tag-upcoming', tagLabel: 'Planned' },
+  };
+
+  list.innerHTML = featureRows.map(f => {
+    const s = statusIcons[(f.status || 'upcoming').toLowerCase()] || statusIcons.upcoming;
+    return `<div class="feature-row">
+      <div class="feature-icon ${s.cls}">${s.icon}</div>
+      <div class="feature-name ${s.cls === 'done' ? 'done' : ''}">${f.name}</div>
+      <span class="feature-status-tag ${s.tagCls}">${s.tagLabel}</span>
+    </div>`;
+  }).join('');
+}
+
 // ── Apply Dashboard Data CSV ──────────────────────────────
 // Column positions (0-indexed) from the xlsx:
 //  0: metric_key   1: display_value   2: target_display
 //  3: actual_num   4: target_num      5: pct_complete
 //  6: status       7: yoy_trend       8: meta_notes
 function applyDashboardData(rows) {
-  const keyMap = {
-    revenue: 'rev', cvr: 'cvr', conversion: 'cvr',
-    traffic: 'trf', features: 'ftr', feature: 'ftr',
-  };
+  const featureRows = [];
 
   rows.forEach(fields => {
     const metricKey = (fields[0] || '').toLowerCase().trim();
-    const k = Object.keys(keyMap).find(p => metricKey.includes(p));
-    if (!k) return;
-    const id = keyMap[k];
+
+    // ── Feature name rows: feature_1, feature_2, etc.
+    if (metricKey.match(/^feature_\d+$/)) {
+      featureRows.push({
+        name:   fields[1] || '',
+        status: (fields[2] || 'upcoming').toLowerCase().trim(),
+      });
+      return;
+    }
+
+    // ── CVR by Users row
+    if (metricKey === 'cvr_users') {
+      CVR_DATA.users.actual   = fields[1] || '—';
+      CVR_DATA.users.target   = fields[2] || '';
+      CVR_DATA.users.pct      = parseFloat(fields[5] || 0);
+      CVR_DATA.users.baseline = parseFloat(fields[6] || 0);
+      CVR_DATA.users.status   = (fields[7] || '').trim();
+      CVR_DATA.users.meta     = (fields[9] || '').trim();
+      return;
+    }
+
+    const exactMap = {
+      revenue: 'rev', cvr: 'cvr', conversion: 'cvr',
+      traffic: 'trf', features: 'ftr',
+    };
+    const id = exactMap[metricKey];
+    if (!id) return;
 
     const val    = fields[1] || '';   // display_value
     const tgt    = fields[2] || '';   // target_display
     const pct    = parseFloat(fields[5] || 0);  // pct_complete (formula result)
-    const status = fields[6] || '';   // status
-    const meta   = fields[8] || '';   // meta_notes
+    const baseline = parseFloat(fields[6] || 0); // baseline_num
+    const status = (fields[7] || '').trim();   // status (col index shifted by baseline col)
+    const meta   = (fields[9] || '').trim();   // meta_notes
+
+    // ── Store CVR sessions data
+    if (id === 'cvr') {
+      CVR_DATA.sessions.actual   = val;
+      CVR_DATA.sessions.target   = tgt;
+      CVR_DATA.sessions.pct      = pct;
+      CVR_DATA.sessions.baseline = baseline || RATING_TIERS.cvr.baseline;
+      CVR_DATA.sessions.status   = status;
+      CVR_DATA.sessions.meta     = meta;
+      RATING_TIERS.cvr.baseline  = baseline || RATING_TIERS.cvr.baseline;
+    }
 
     if (val) document.getElementById(`${id}-actual`).textContent = val;
     if (tgt) document.getElementById(`${id}-target`).textContent = tgt;
@@ -1475,6 +1859,8 @@ function applyDashboardData(rows) {
       }
     }
   });
+
+  // Feature rows collected but not rendered (roadmap panel handles this)
 }
 
 // ── Apply Settings CSV ────────────────────────────────────
@@ -1557,6 +1943,27 @@ function applySettings(rows) {
   Object.entries(hideMap).forEach(([key, sectionId]) => {
     const el = document.getElementById(sectionId);
     if (el) el.style.display = cfg[key] === 'true' ? 'none' : '';
+  });
+
+  // ── Rating tiers — read from Settings sheet ────────────
+  // Revenue: rating_rev_3, rating_rev_4, rating_rev_5 (fixed $M)
+  // CVR: rating_cvr_pct3, rating_cvr_pct4, rating_cvr_pct5 (% increase YoY)
+  // Traffic: rating_trf_pct3, rating_trf_pct4, rating_trf_pct5 (% increase YoY) + rating_trf_baseline
+  // Features: rating_ftr_3, rating_ftr_4, rating_ftr_5 (fixed counts)
+  if (cfg['rating_cvr_pct3']) RATING_TIERS.cvr.pct3 = parseFloat(cfg['rating_cvr_pct3']);
+  if (cfg['rating_cvr_pct4']) RATING_TIERS.cvr.pct4 = parseFloat(cfg['rating_cvr_pct4']);
+  if (cfg['rating_cvr_pct5']) RATING_TIERS.cvr.pct5 = parseFloat(cfg['rating_cvr_pct5']);
+
+  renderRevenueTiers(cfg);
+  renderCVRTiers(RATING_TIERS.cvr.baseline);
+  renderTrafficTiers(cfg);
+  renderFeatureTiers(cfg);
+
+  // ── Monthly budget values for sparkline % labels ───────
+  // Read from Settings: budget_jan, budget_feb, … budget_dec
+  MONTHS.forEach((m, i) => {
+    const bKey = `budget_${m.toLowerCase()}`;
+    if (cfg[bKey]) MONTHLY_BUDGET[i] = parseFloat(cfg[bKey]);
   });
 
   // ── Milestone list (rendered from Settings: milestone_1_name, milestone_1_date, milestone_1_status …)
@@ -1666,6 +2073,44 @@ function renderTeam(cfg) {
   }).join('');
 }
 
+// ── Apply Sub-Metrics CSV ────────────────────────────────
+// Reads the Sub-Metrics sheet to populate the expandable details sections.
+// Columns: 0:goal_id 1:sub_key 2:label 3:cy_value 4:ly_value 5:delta_display 6:delta_direction
+function applySubMetrics(rows) {
+  const goalMap = { rev: [], cvr: [], trf: [], ftr: [] };
+
+  rows.forEach(fields => {
+    const goalId = (fields[0] || '').toLowerCase().trim();
+    if (!goalMap[goalId]) return;
+    const label     = fields[2] || '';
+    const cyVal     = fields[3] || '';
+    const deltaDisp = fields[5] || '';
+    const deltaDir  = (fields[6] || 'flat').toLowerCase().trim();
+    if (!label) return;
+    goalMap[goalId].push({ label, val: cyVal, delta: deltaDisp, dir: deltaDir });
+  });
+
+  // Render each goal's sub-metrics (max 3 shown in the card)
+  Object.entries(goalMap).forEach(([id, subs]) => {
+    if (subs.length === 0) return;
+    const card = document.getElementById(`${id}-actual`)?.closest('.goal-card');
+    if (!card) return;
+    const container = card.querySelector('.sub-metrics');
+    if (!container) return;
+
+    // Take first 3 sub-metrics for the card
+    const display = subs.slice(0, 3);
+    container.innerHTML = display.map(s => {
+      const dirClass = s.dir === 'up' ? 'delta-up' : s.dir === 'down' ? 'delta-down' : 'delta-flat';
+      return `<div class="sub-metric">
+        <div class="sub-metric-val">${s.val}</div>
+        <div class="sub-metric-label">${s.label}</div>
+        <div class="sub-metric-delta ${dirClass}">${s.delta}</div>
+      </div>`;
+    }).join('');
+  });
+}
+
 // ── Fetch a single CSV URL (CORS-safe) ───────────────────
 // Google Sheets published CSVs block direct fetch() from local files.
 // We try direct first (works on GitHub Pages / Google Sites),
@@ -1705,6 +2150,7 @@ async function fetchCSV(url) {
 async function refreshAll(silent = false) {
   const urlData     = SHEET_URL_DATA;
   const urlSettings = SHEET_URL_SETTINGS;
+  const urlSubs     = SHEET_URL_SUBMETRICS;
 
   if (!urlData && !urlSettings) return; // URLs not yet filled in by admin
 
@@ -1726,6 +2172,13 @@ async function refreshAll(silent = false) {
       applySettings(rows);
     }
   } catch (e) { errors.push('Settings: ' + e.message); ok = false; }
+
+  try {
+    if (urlSubs) {
+      const rows = await fetchCSV(urlSubs);
+      applySubMetrics(rows);
+    }
+  } catch (e) { /* Sub-metrics are optional — don't block */ }
 
   document.getElementById('loadingOverlay').classList.remove('visible');
 
@@ -1812,6 +2265,7 @@ function buildSparkline(data) {
     const bar = document.createElement('div');
     bar.className = 'spark-bar';
     bar.style.height = pct + '%';
+    bar.style.position = 'relative';
     // Tooltip: format based on unit
     const tooltip = d.v > 0
       ? (SPARKLINE_UNIT === 'M' ? `$${d.v}M` : `$${d.v}K`)
@@ -1822,6 +2276,16 @@ function buildSparkline(data) {
       : d.v > 0 ? 'rgba(174,19,42,0.25)' : 'var(--bg3)';
     if (i === lastActualIdx) bar.style.boxShadow = '0 0 10px rgba(174,19,42,0.3)';
     if (d.v === 0)           bar.style.border    = '1px dashed var(--border)';
+
+    // Budget % label above actual bars
+    if (d.v > 0 && MONTHLY_BUDGET[i] > 0) {
+      const budgetPct = ((d.v / MONTHLY_BUDGET[i]) - 1) * 100;
+      const budgetLabel = document.createElement('div');
+      budgetLabel.className = `spark-budget-label ${budgetPct >= 0 ? 'positive' : 'negative'}`;
+      budgetLabel.textContent = `${budgetPct >= 0 ? '+' : ''}${Math.round(budgetPct)}%`;
+      bar.appendChild(budgetLabel);
+    }
+
     wrap.appendChild(bar);
     const lbl = document.createElement('div');
     lbl.className = 'spark-label'; lbl.textContent = d.m;
@@ -1906,9 +2370,6 @@ function makeEditable(el) {
   // Always auto-fetch for every visitor — no setup required
   refreshAll(true);
 })();
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
